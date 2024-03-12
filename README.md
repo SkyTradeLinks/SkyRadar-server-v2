@@ -77,8 +77,9 @@ Nest is [MIT licensed](LICENSE).
 ## Data structure
 Information that can be retrieved from an aircraft is shown below:
 
-```
-GET aircrafts (get all aircrafts)
+
+```GET``` aircrafts (get all aircrafts)
+
 ```
 [
   {
@@ -242,6 +243,7 @@ GET aircrafts (get all aircrafts)
 
 Example response
 
+```
 [
   {
     "macAddress": 987654321098765,
@@ -324,3 +326,4 @@ Example response
     }
   }
 ]
+```
