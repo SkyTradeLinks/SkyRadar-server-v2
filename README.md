@@ -240,6 +240,7 @@ Information that can be retrieved from an aircraft is shown below:
     },
   }
 ]
+```
 
 Example response
 
