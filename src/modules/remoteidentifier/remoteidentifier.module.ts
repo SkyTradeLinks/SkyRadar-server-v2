@@ -1,16 +1,10 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { RemoteidentifierController } from './controllers/remoteidentifier/remoteidentifier.controller';
 import { RemoteidentifierService } from './services/remoteidentifier/remoteidentifier.service';
-import { RemoteIdentifierModel } from './model/RemoteIdentifier.model';
+import { PrismaModule } from 'src/database/prisma.module';
 
 @Module({
-  imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/remotehistoricalID'),
-    MongooseModule.forFeature([
-      { name: 'Remoteidentifier', schema: RemoteIdentifierModel },
-    ]),
-  ],
+  imports: [PrismaModule],
   controllers: [RemoteidentifierController],
   providers: [RemoteidentifierService],
 })
