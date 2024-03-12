@@ -78,168 +78,168 @@ Nest is [MIT licensed](LICENSE).
 Information that can be retrieved from an aircraft is shown below:
 
 
-```GET``` aircrafts (get all aircrafts)
+```POST``` aircraft
 
 ```
-[
-  {
-    macAddress: long,
-    
-    connection: {
-    
-      rssi: int,
-      
-      transportType: string,
-      
-      macAddress: string,
-      
-      lastSeen: long (timestamp),
-      
-      firstSeen: long (timestamp),
-      
-      msgDelta: long (timestamp)
-      
-    },
-    
-    identification1: {
-    
-      uaType: enum, // possible values of uaType are None, Aeroplane, Helicopter_or_Multirotor, Gyroplane, Hybrid_Lift, Ornithopter, Glider, Kite, Free_balloon, Captive_balloon, Airship, Free_fall_parachute, Rocket, Tethered_powered_aircraft, Ground_obstacle, Other
-      
-      idType: enum, // possible values of idType are None, Serial_Number, CAA_Registration_ID, UTM_Assigned_ID, Specific_Session_ID
-      
-      uasId: byte[]
-    
-    },
-    
-    identification2: {
-    
-      uaType: enum, // possible values of uaType are None, Aeroplane, Helicopter_or_Multirotor, Gyroplane, Hybrid_Lift, Ornithopter, Glider, Kite, Free_balloon, Captive_balloon, Airship, Free_fall_parachute, Rocket, Tethered_powered_aircraft, Ground_obstacle, Other
-      
-      idType: enum, // possible values of idType are None, Serial_Number, CAA_Registration_ID, UTM_Assigned_ID, Specific_Session_ID
-      
-      uasId: byte[]
-    
-    },
-    
-    id1Shadow: {
-    
-      uaType: enum, // possible values of uaType are None, Aeroplane, Helicopter_or_Multirotor, Gyroplane, Hybrid_Lift, Ornithopter, Glider, Kite, Free_balloon, Captive_balloon, Airship, Free_fall_parachute, Rocket, Tethered_powered_aircraft, Ground_obstacle, Other
-      
-      idType: enum, // possible values of idType are None, Serial_Number, CAA_Registration_ID, UTM_Assigned_ID, Specific_Session_ID
-      
-      uasId: byte[]
-    
-    },
-    
-    id2Shadow: {
 
-      uaType: enum, // possible values of uaType are None, Aeroplane, Helicopter_or_Multirotor, Gyroplane, Hybrid_Lift, Ornithopter, Glider, Kite, Free_balloon, Captive_balloon, Airship, Free_fall_parachute, Rocket, Tethered_powered_aircraft, Ground_obstacle, Other
-      
-      idType: enum, // possible values of idType are None, Serial_Number, CAA_Registration_ID, UTM_Assigned_ID, Specific_Session_ID
-      
-      uasId: byte[]
+{
+  macAddress: long,
+  
+  connection: {
+  
+    rssi: int,
     
-    },
+    transportType: string,
     
-    location: {
+    macAddress: string,
     
-      status: enum, // possible values of status are Undeclared, Ground, Airborne, Emergency, Remote_ID_System_Failure
-      
-      heightType: enum // possible values of heightType are Takeoff, Ground
-      
-      direction: double,
-      
-      speedHorizontal: double,
-      
-      speedVertical: double,
-      
-      latitude: double,
-      
-      longitude: double,
-      
-      altitudePressure: double,
-      
-      altitudeGeodetic: double,
-      
-      height: double,
-      
-      horizontalAccuracy: enum, // possible values of horizontalAccuracy are Unknown, kilometers_18_52, kilometers_7_408, kilometers_3_704, kilometers_1_852, meters_926, meters_555_6, meters_185_2, meters_92_6, meters_30, meters_10, meters_3, meters_1
-      
-      verticalAccuracy: enum, // possible values of verticalAccuracy are Unknown, meters_150, meters_45, meters_25, meters_10, meters_3, meters_1
-      
-      baroAccuracy: enum, // possible values of baroAccuracy are Unknown, meters_150, meters_45, meters_25, meters_10, meters_3, meters_1
-      
-      speedAccuracy: enum, // possible values of speedAccuracy are Unknown, meter_per_second_10, meter_per_second_3, meter_per_second_1, meter_per_second_0_3
-      
-      locationTimestamp: double,
-      
-      timeAccuracy: double,
-      
-      distance: float
+    lastSeen: long (timestamp),
     
-    },
+    firstSeen: long (timestamp),
     
-    authentication: {
+    msgDelta: long (timestamp)
     
-      authType: enum, // possible values of authType are None, UAS_ID_Signature, Operator_ID_Signature, Message_Set_Signature, Network_Remote_ID, Specific_Authentication, Private_Use_0xA, Private_Use_0xB, Private_Use_0xC, Private_Use_0xD, Private_Use_0xE, Private_Use_0xF
+  },
+  
+  identification1: {
+  
+    uaType: enum, // possible values of uaType are None, Aeroplane, Helicopter_or_Multirotor, Gyroplane, Hybrid_Lift, Ornithopter, Glider, Kite, Free_balloon, Captive_balloon, Airship, Free_fall_parachute, Rocket, Tethered_powered_aircraft, Ground_obstacle, Other
     
-      authDataPage: int,
-      
-      authLastPageIndex: int,
-      
-      authLength: int,
-      
-      authTimestamp: long (timestamp),
-      
-      authData: byte[]
-      
-    },
+    idType: enum, // possible values of idType are None, Serial_Number, CAA_Registration_ID, UTM_Assigned_ID, Specific_Session_ID
     
-    selfId: {
+    uasId: byte[]
+  
+  },
+  
+  identification2: {
+  
+    uaType: enum, // possible values of uaType are None, Aeroplane, Helicopter_or_Multirotor, Gyroplane, Hybrid_Lift, Ornithopter, Glider, Kite, Free_balloon, Captive_balloon, Airship, Free_fall_parachute, Rocket, Tethered_powered_aircraft, Ground_obstacle, Other
+    
+    idType: enum, // possible values of idType are None, Serial_Number, CAA_Registration_ID, UTM_Assigned_ID, Specific_Session_ID
+    
+    uasId: byte[]
+  
+  },
+  
+  id1Shadow: {
+  
+    uaType: enum, // possible values of uaType are None, Aeroplane, Helicopter_or_Multirotor, Gyroplane, Hybrid_Lift, Ornithopter, Glider, Kite, Free_balloon, Captive_balloon, Airship, Free_fall_parachute, Rocket, Tethered_powered_aircraft, Ground_obstacle, Other
+    
+    idType: enum, // possible values of idType are None, Serial_Number, CAA_Registration_ID, UTM_Assigned_ID, Specific_Session_ID
+    
+    uasId: byte[]
+  
+  },
+  
+  id2Shadow: {
 
-      descriptionType: enum, // possible values of descriptionType are Text, Emergency, Extended_Status, Invalid
-      
-      operationDescription: byte[]
+    uaType: enum, // possible values of uaType are None, Aeroplane, Helicopter_or_Multirotor, Gyroplane, Hybrid_Lift, Ornithopter, Glider, Kite, Free_balloon, Captive_balloon, Airship, Free_fall_parachute, Rocket, Tethered_powered_aircraft, Ground_obstacle, Other
     
-    },
+    idType: enum, // possible values of idType are None, Serial_Number, CAA_Registration_ID, UTM_Assigned_ID, Specific_Session_ID
     
-    system: {
+    uasId: byte[]
+  
+  },
+  
+  location: {
+  
+    status: enum, // possible values of status are Undeclared, Ground, Airborne, Emergency, Remote_ID_System_Failure
     
-      operatorLocationType: enum, // possible values of operatorLocationType are TakeOff, Dynamic, Fixed, Invalid
-      
-      classificationType: enum, // possible values of classificationType are Undeclared, EU
-      
-      operatorLatitude: double,
-      
-      operatorLongitude: double,
-      
-      areaCount: int,
-      
-      areaRadius: int,
-      
-      areaCeiling: double,
-      
-      areaFloor: double,
-      
-      category: enum, // possible values of category are Undeclared, EU_Open, EU_Specific, EU_Certified
-      
-      classValue: enum, // possible values of classValue are Undeclared, EU_Class_0, EU_Class_1, EU_Class_2, EU_Class_3, EU_Class_4, EU_Class_5, EU_Class_6
-      
-      operatorAltitudeGeo: double,
-      
-      systemTimestamp: long (timestamp)
-      
-    },
+    heightType: enum // possible values of heightType are Takeoff, Ground
     
-    operatorId: {
+    direction: double,
     
-      operatorIdType: int,
-      
-      operatorId: byte[],
+    speedHorizontal: double,
     
-    },
-  }
-]
+    speedVertical: double,
+    
+    latitude: double,
+    
+    longitude: double,
+    
+    altitudePressure: double,
+    
+    altitudeGeodetic: double,
+    
+    height: double,
+    
+    horizontalAccuracy: enum, // possible values of horizontalAccuracy are Unknown, kilometers_18_52, kilometers_7_408, kilometers_3_704, kilometers_1_852, meters_926, meters_555_6, meters_185_2, meters_92_6, meters_30, meters_10, meters_3, meters_1
+    
+    verticalAccuracy: enum, // possible values of verticalAccuracy are Unknown, meters_150, meters_45, meters_25, meters_10, meters_3, meters_1
+    
+    baroAccuracy: enum, // possible values of baroAccuracy are Unknown, meters_150, meters_45, meters_25, meters_10, meters_3, meters_1
+    
+    speedAccuracy: enum, // possible values of speedAccuracy are Unknown, meter_per_second_10, meter_per_second_3, meter_per_second_1, meter_per_second_0_3
+    
+    locationTimestamp: double,
+    
+    timeAccuracy: double,
+    
+    distance: float
+  
+  },
+  
+  authentication: {
+  
+    authType: enum, // possible values of authType are None, UAS_ID_Signature, Operator_ID_Signature, Message_Set_Signature, Network_Remote_ID, Specific_Authentication, Private_Use_0xA, Private_Use_0xB, Private_Use_0xC, Private_Use_0xD, Private_Use_0xE, Private_Use_0xF
+  
+    authDataPage: int,
+    
+    authLastPageIndex: int,
+    
+    authLength: int,
+    
+    authTimestamp: long (timestamp),
+    
+    authData: byte[]
+    
+  },
+  
+  selfId: {
+
+    descriptionType: enum, // possible values of descriptionType are Text, Emergency, Extended_Status, Invalid
+    
+    operationDescription: byte[]
+  
+  },
+  
+  system: {
+  
+    operatorLocationType: enum, // possible values of operatorLocationType are TakeOff, Dynamic, Fixed, Invalid
+    
+    classificationType: enum, // possible values of classificationType are Undeclared, EU
+    
+    operatorLatitude: double,
+    
+    operatorLongitude: double,
+    
+    areaCount: int,
+    
+    areaRadius: int,
+    
+    areaCeiling: double,
+    
+    areaFloor: double,
+    
+    category: enum, // possible values of category are Undeclared, EU_Open, EU_Specific, EU_Certified
+    
+    classValue: enum, // possible values of classValue are Undeclared, EU_Class_0, EU_Class_1, EU_Class_2, EU_Class_3, EU_Class_4, EU_Class_5, EU_Class_6
+    
+    operatorAltitudeGeo: double,
+    
+    systemTimestamp: long (timestamp)
+    
+  },
+  
+  operatorId: {
+  
+    operatorIdType: int,
+    
+    operatorId: byte[],
+  
+  },
+}
+
 ```
 
 Example response
