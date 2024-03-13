@@ -12,7 +12,7 @@ async function bootstrap() {
   );
   const config = new DocumentBuilder()
     .setTitle('SkyRadar server')
-    .setDescription('API is for SkyRadar Server remote indentification ')
+    .setDescription('API is for SkyRadar Server remote indentification')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
