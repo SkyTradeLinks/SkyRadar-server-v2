@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { RemoteidentifierModule } from './modules/remoteidentifier/remoteidentifier.module';
-import { PrismaExceptionFilter } from './modules/remoteidentifier/exceptions/prisma-exception.filter';
+import { PrismaExceptionFilter } from './filters/remoteidentifier-exceptions/prisma-exception.filter';
 
 @Module({
   imports: [RemoteidentifierModule],
