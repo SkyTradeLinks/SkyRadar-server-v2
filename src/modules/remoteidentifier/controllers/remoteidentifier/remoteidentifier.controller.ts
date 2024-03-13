@@ -1,11 +1,6 @@
-import {
-  Controller,
-  Get,
-  Post,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { RemoteidentifierService } from '../../services/remoteidentifier/remoteidentifier.service';
+import { Prisma } from '@prisma/client';
 
 @Controller('remoteidentifier')
 export class RemoteidentifierController {
@@ -13,11 +8,8 @@ export class RemoteidentifierController {
   constructor(
     private readonly remoteIdentifierService: RemoteidentifierService,
   ) {}
-
-  @Get()
-  async getRemoteIdentifier() {}
-
   @Post()
-  @UsePipes(new ValidationPipe())
-  async insertRemoteIdentifier() {}
+  async createRemoteIdentifier(@Body() data: Prisma.DeviceCreateInput) {
+    return this.remoteIdentifierService.createRemoteIdentifierService(data);
+  }
 }

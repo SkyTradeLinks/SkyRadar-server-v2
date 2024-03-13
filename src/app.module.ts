@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { RemoteidentifierModule } from '../src/modules/remoteidentifier/remoteidentifier.module';
+import { RemoteidentifierModule } from './modules/remoteidentifier/remoteidentifier.module';
 
 @Module({
   imports: [RemoteidentifierModule],

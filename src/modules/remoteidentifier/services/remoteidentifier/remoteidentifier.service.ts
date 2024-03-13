@@ -1,7 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
+import { RemoteIdentifierRepository } from '../../repository/remoteidentifier.repository';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class RemoteidentifierService {
-  constructor(private readonly remoteIdentifierModel: PrismaService) {}
+  constructor(private readonly remoterepository: RemoteIdentifierRepository) {}
+
+  async createRemoteIdentifierService(params: Prisma.DeviceCreateInput) {
+    const deviceData =
+      await this.remoterepository.createRemoteIdentifier(params);
+    return deviceData;
+  }
 }
