@@ -3,10 +3,9 @@ import { RemoteidentifierController } from './controllers/remoteidentifier/remot
 import { RemoteidentifierService } from './services/remoteidentifier/remoteidentifier.service';
 import { PrismaModule } from 'src/database/prisma.module';
 import { RemoteIdentifierRepository } from './repository/remoteidentifier.repository';
-import { SwaggerModules } from './documentation/swagger.module';
 
 @Module({
-  imports: [PrismaModule, SwaggerModules],
+  imports: [PrismaModule],
   controllers: [RemoteidentifierController],
   providers: [RemoteidentifierService, RemoteIdentifierRepository],
   exports: [RemoteidentifierService],
