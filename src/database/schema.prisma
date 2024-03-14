@@ -13,113 +13,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Connection {
-  id            String   @id @default(uuid())
-  rssi          Int
-  transportType String
-  macAddress    String
-  lastSeen      Decimal  
-  firstSeen     Decimal 
-  msgDelta      Int
-  Device        Device[]
-}
-
-model Identification {
-  id      Int      @id @default(autoincrement())
-  uaType  String
-  idType  String
-  uasId   Int[]
-  device1 Device[] @relation("identification1Relation")
-  device2 Device[] @relation("identification2Relation")
-  shadow1 Device[] @relation("id1ShadowRelation")
-  shadow2 Device[] @relation("id2ShadowRelation")
-}
-
-model Location {
-  id                 String   @id @default(uuid())
-  status             String
-  heightType         String
-  direction          Float
-  speedHorizontal    Float
-  speedVertical      Float
-  latitude           Float
-  longitude          Float
-  altitudePressure   Float
-  altitudeGeodetic   Float
-  height             Float
-  horizontalAccuracy String
-  verticalAccuracy   String
-  baroAccuracy       String
-  speedAccuracy      String
-  locationTimestamp  Decimal 
-  timeAccuracy       Float
-  distance           Float
-  Device             Device[]
-}
-
-model Authentication {
-  id                String   @id @default(uuid())
-  authType          String
-  authDataPage      Int
-  authLastPageIndex Int
-  authLength        Int
-  authTimestamp     Decimal 
-  authData          Int[]
-  Device            Device[]
-}
-
-model SelfId {
-  id                   String   @id @default(uuid())
-  descriptionType      String
-  operationDescription Int[]
-  Device               Device[]
-}
-
-model System {
-  id                   String   @id @default(uuid())
-  operatorLocationType String
-  classificationType   String
-  operatorLatitude     Float
-  operatorLongitude    Float
-  areaCount            Int
-  areaRadius           Int
-  areaCeiling          Float
-  areaFloor            Float
-  category             String
-  classValue           String
-  operatorAltitudeGeo  Float
-  systemTimestamp      Decimal 
-  Device               Device[]
-}
-
-model OperatorId {
-  id             String   @id @default(uuid())
-  operatorIdType Int
-  operatorId     Int[]
-  Device         Device[]
-}
-
 model Device {
-  id                String         @id @default(uuid())
+  id                String       @id @default(uuid())
   macAddress        String
-  connection        Connection     @relation(fields: [connectionId], references: [id])
-  identification1   Identification @relation(name: "identification1Relation", fields: [identification1Id], references: [id])
-  identification1Id Int
-  identification2   Identification @relation(name: "identification2Relation", fields: [identification2Id], references: [id])
-  identification2Id Int
-  id1Shadow         Identification @relation(name: "id1ShadowRelation", fields: [id1ShadowId], references: [id])
-  id1ShadowId       Int
-  id2Shadow         Identification @relation(name: "id2ShadowRelation", fields: [id2ShadowId], references: [id])
-  id2ShadowId       Int
-  location          Location       @relation(fields: [locationId], references: [id])
-  authentication    Authentication @relation(fields: [authenticationId], references: [id])
-  selfId            SelfId         @relation(fields: [selfIdId], references: [id])
-  system            System         @relation(fields: [systemId], references: [id])
-  operatorId        OperatorId     @relation(fields: [operatorIdId], references: [id])
-  connectionId      String
-  locationId        String
-  authenticationId  String
-  selfIdId          String
-  systemId          String
-  operatorIdId      String
+  connection        Json
+  identification1   Json
+  identification2   Json
+  id1Shadow         Json
+  id2Shadow         Json
+  location          Json
+  authentication    Json
+  selfId            Json
+  system            Json
+  operatorId        Json
 }
