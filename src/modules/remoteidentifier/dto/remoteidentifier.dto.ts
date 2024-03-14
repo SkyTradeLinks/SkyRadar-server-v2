@@ -1,10 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
 export class RemoteIdentifierEntity {
   @ApiProperty()
+  @IsNotEmpty()
   macAddress: string;
 
   @ApiProperty()
+  @IsNotEmpty()
   connection: {
     create: {
       rssi: number;
@@ -17,6 +20,7 @@ export class RemoteIdentifierEntity {
   };
 
   @ApiProperty()
+  @IsNotEmpty()
   identification1: {
     create: {
       uaType: string;
@@ -26,6 +30,7 @@ export class RemoteIdentifierEntity {
   };
 
   @ApiProperty()
+  @IsNotEmpty()
   identification2: {
     create: {
       uaType: string;
@@ -35,6 +40,7 @@ export class RemoteIdentifierEntity {
   };
 
   @ApiProperty()
+  @IsNotEmpty()
   id1Shadow: {
     create: {
       uaType: string;
@@ -44,6 +50,7 @@ export class RemoteIdentifierEntity {
   };
 
   @ApiProperty()
+  @IsNotEmpty()
   id2Shadow: {
     create: {
       uaType: string;
@@ -53,6 +60,7 @@ export class RemoteIdentifierEntity {
   };
 
   @ApiProperty()
+  @IsNotEmpty()
   location: {
     create: {
       status: string;
@@ -76,6 +84,7 @@ export class RemoteIdentifierEntity {
   };
 
   @ApiProperty()
+  @IsNotEmpty()
   authentication: {
     create: {
       authType: string;
@@ -88,6 +97,7 @@ export class RemoteIdentifierEntity {
   };
 
   @ApiProperty()
+  @IsNotEmpty()
   selfId: {
     create: {
       descriptionType: string;
@@ -96,6 +106,7 @@ export class RemoteIdentifierEntity {
   };
 
   @ApiProperty()
+  @IsNotEmpty()
   system: {
     create: {
       operatorLocationType: string;
@@ -114,6 +125,7 @@ export class RemoteIdentifierEntity {
   };
 
   @ApiProperty()
+  @IsNotEmpty()
   operatorId: {
     create: {
       operatorIdType: number;
