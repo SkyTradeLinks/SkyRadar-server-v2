@@ -14,16 +14,6 @@ datasource db {
 }
 
 model Device {
-  id                String       @id @default(uuid())
-  macAddress        String
-  connection        Json
-  identification1   Json
-  identification2   Json
-  id1Shadow         Json
-  id2Shadow         Json
-  location          Json
-  authentication    Json
-  selfId            Json
-  system            Json
-  operatorId        Json
+  id         String @id @default(uuid())
+  remotedata Json
 }

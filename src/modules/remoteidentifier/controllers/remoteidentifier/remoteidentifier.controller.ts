@@ -19,7 +19,9 @@ export class RemoteidentifierController {
   @ApiOperation({ summary: 'Create Remote Identification' })
   @ApiCreatedResponse({ description: 'Remote Identifiction has been created' })
   @UsePipes(new ValidationPipe())
-  async createRemoteIdentifier(@Body() data: RemoteIdentifierEntity) {
-    return this.remoteIdentifierService.createRemoteIdentifierService(data);
+  async createRemoteIdentifier(@Body() remotedata: RemoteIdentifierEntity) {
+    return this.remoteIdentifierService.createRemoteIdentifierService(
+      remotedata,
+    );
   }
 }
