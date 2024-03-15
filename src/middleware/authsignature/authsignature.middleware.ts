@@ -11,7 +11,7 @@ import { Request, Response, NextFunction } from 'express';
 const MAX_SIGN_VALIDATION = 5; // 5 minutes
 
 @Injectable()
-export class AuthsignatureMiddleware implements NestMiddleware {
+export class AuthSignatureMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction): Promise<any> {
     const { sign, sign_issue_at, sign_nonce, sign_address } = req.headers;
 

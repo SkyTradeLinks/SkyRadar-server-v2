@@ -1,8 +1,8 @@
 import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { RemoteidentifierModule } from './modules/remoteidentifier/remoteidentifier.module';
-import { PrismaExceptionFilter } from './filters/remoteidentifier-exceptions/prisma-exception.filter';
-import { AuthsignatureMiddleware } from './middleware/authsignature/authsignature.middleware';
+import { PrismaExceptionFilter } from './filters/remoteidentifier-exceptions/prismaException.filter';
+import { AuthSignatureMiddleware } from './middleware/authsignature/authSignature.middleware';
 
 @Module({
   imports: [RemoteidentifierModule],
@@ -16,7 +16,7 @@ import { AuthsignatureMiddleware } from './middleware/authsignature/authsignatur
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthsignatureMiddleware).forRoutes({
+    consumer.apply(AuthSignatureMiddleware).forRoutes({
       path: 'remoteidentifier',
       method: RequestMethod.POST,
     });

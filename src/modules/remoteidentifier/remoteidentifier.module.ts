@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { RemoteidentifierController } from './controllers/remoteidentifier/remoteidentifier.controller';
-import { RemoteidentifierService } from './services/remoteidentifier/remoteidentifier.service';
+import { RemoteIdentifierController } from './controllers/remoteidentifier/remoteIdentifier.controller';
+import { RemoteIdentifierService } from './services/remoteidentifier/remoteIdentifier.service';
 import { PrismaModule } from 'src/database/prisma.module';
-import { RemoteIdentifierRepository } from './repository/remoteidentifier.repository';
+import { RemoteIdentifierRepository } from './repository/remoteIdentifier.repository';
 
 @Module({
   imports: [PrismaModule],
-  controllers: [RemoteidentifierController],
-  providers: [RemoteidentifierService, RemoteIdentifierRepository],
-  exports: [RemoteidentifierService],
+  controllers: [RemoteIdentifierController],
+  providers: [RemoteIdentifierService, RemoteIdentifierRepository],
+  exports: [RemoteIdentifierService],
 })
 export class RemoteidentifierModule {}

@@ -1,7 +1,7 @@
-import { AuthsignatureMiddleware } from './authsignature.middleware';
+import { AuthSignatureMiddleware } from './authSignature.middleware';
 
 describe('AuthsignatureMiddleware', () => {
   it('should be defined', () => {
-    expect(new AuthsignatureMiddleware()).toBeDefined();
+    expect(new AuthSignatureMiddleware()).toBeDefined();
   });
 });
