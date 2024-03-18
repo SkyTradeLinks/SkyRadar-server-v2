@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RemoteidentifierController } from './remoteidentifier.controller';
+import { RemoteIdentifierController } from './remoteIdentifierController';
 
 describe('RemoteidentifierController', () => {
-  let controller: RemoteidentifierController;
+  let controller: RemoteIdentifierController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [RemoteidentifierController],
+      controllers: [RemoteIdentifierController],
     }).compile();
 
-    controller = module.get<RemoteidentifierController>(
-      RemoteidentifierController,
+    controller = module.get<RemoteIdentifierController>(
+      RemoteIdentifierController,
     );
   });
 

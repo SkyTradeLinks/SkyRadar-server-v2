@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RemoteidentifierService } from './remoteidentifier.service';
+import { RemoteIdentifierService } from './remoteIdentifierService';
 
 describe('RemoteidentifierService', () => {
-  let service: RemoteidentifierService;
+  let service: RemoteIdentifierService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [RemoteidentifierService],
+      providers: [RemoteIdentifierService],
     }).compile();
 
-    service = module.get<RemoteidentifierService>(RemoteidentifierService);
+    service = module.get<RemoteIdentifierService>(RemoteIdentifierService);
   });
 
   it('should be defined', () => {
