@@ -1,4 +1,4 @@
-import { AuthSignatureMiddleware } from './authentication.middleware';
+import { AuthSignatureMiddleware } from './authenticationMiddleware';
 
 describe('AuthsignatureMiddleware', () => {
   it('should be defined', () => {

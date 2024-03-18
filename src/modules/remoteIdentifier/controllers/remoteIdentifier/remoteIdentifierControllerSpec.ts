@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RemoteIdentifierController } from './remoteIdentifier.controller';
+import { RemoteIdentifierController } from './remoteIdentifierController';
 
 describe('RemoteidentifierController', () => {
   let controller: RemoteIdentifierController;

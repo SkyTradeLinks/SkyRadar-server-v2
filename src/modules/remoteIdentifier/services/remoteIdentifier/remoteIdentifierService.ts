@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { RemoteIdentifierRepository } from '../../repository/remoteIdentifier.repository';
+import { RemoteIdentifierRepository } from '../../repository/remoteIdentifierRepository';
 import { Prisma } from '@prisma/client';
 
 @Injectable()

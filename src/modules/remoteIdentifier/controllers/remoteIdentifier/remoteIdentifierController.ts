@@ -5,9 +5,9 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteIdentifier.service';
+import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteIdentifierService';
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
-import { RemoteIdentifierEntity } from '../../dto/remoteIdentifier.dto';
+import { RemoteIdentifierEntity } from '../../dto/remoteIdentifierDto';
 
 @Controller('remoteidentifier')
 @ApiTags('remoteidentifier')
