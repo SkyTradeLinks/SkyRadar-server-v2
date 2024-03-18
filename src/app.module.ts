@@ -2,7 +2,7 @@ import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { RemoteidentifierModule } from './modules/remoteIdentifier/remoteIdentifier.module';
 import { PrismaExceptionFilter } from './filters/remoteIdentifierExceptions/prismaException.filter';
-import { AuthSignatureMiddleware } from './middleware/authSignature/authSignature.middleware';
+import { AuthSignatureMiddleware } from './middleware/authentication/authentication.middleware';
 
 @Module({
   imports: [RemoteidentifierModule],
