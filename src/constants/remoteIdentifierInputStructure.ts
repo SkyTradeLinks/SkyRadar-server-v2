@@ -1,4 +1,4 @@
-export const remoteIdentifierInputStructure = {
+const remoteIdentifierInputStructure = {
   remotedata: {
     macAddress: '987654321098765',
     connection: {
@@ -104,3 +104,5 @@ export const remoteIdentifierInputStructure = {
     },
   },
 };
+
+export default remoteIdentifierInputStructure;

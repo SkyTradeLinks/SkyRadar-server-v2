@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RemoteIdentifierService } from './remoteIdentifierService';
+import { RemoteIdentifierService } from '../../modules/remoteIdentifier/services/remoteIdentifier/remoteIdentifier.service';
 
 describe('RemoteidentifierService', () => {
   let service: RemoteIdentifierService;

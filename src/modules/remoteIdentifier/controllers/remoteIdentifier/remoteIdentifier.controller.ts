@@ -2,15 +2,18 @@ import {
   Body,
   Controller,
   Post,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteIdentifierService';
+import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteIdentifier.service';
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
-import { RemoteIdentifierEntity } from '../../dto/remoteIdentifierDto';
+import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
+import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
 
-@Controller('remoteidentifier')
-@ApiTags('remoteidentifier')
+@Controller('remoteIdentifier')
+@ApiTags('remoteIdentifier')
+@UseInterceptors(BackendInterceptor)
 export class RemoteIdentifierController {
   constructor(
     private readonly remoteIdentifierService: RemoteIdentifierService,
@@ -19,7 +22,7 @@ export class RemoteIdentifierController {
   @ApiOperation({ summary: 'Create Remote Identification' })
   @ApiCreatedResponse({ description: 'Remote Identifiction has been created' })
   @UsePipes(new ValidationPipe())
-  async createRemoteIdentifier(@Body() remotedata: RemoteIdentifierEntity) {
+  async createRemoteIdentifier(@Body() remotedata: RemoteIdentifierDto) {
     return this.remoteIdentifierService.createRemoteIdentifierService(
       remotedata,
     );

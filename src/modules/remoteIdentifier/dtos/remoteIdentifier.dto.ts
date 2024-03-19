@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsObject } from 'class-validator';
 
-export class RemoteIdentifierEntity {
+export class RemoteIdentifierDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsObject()
-  remotedata: Record<string, any>;
+  remoteData: any;
 }
