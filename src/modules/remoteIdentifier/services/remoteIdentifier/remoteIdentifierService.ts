@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { RemoteIdentifierRepository } from '../../repository/remoteIdentifierRepository';
 import { Prisma } from '@prisma/client';
+import { IBoundingBoxData } from 'src/interfaces/remoteIdentifierInterface';
 
 @Injectable()
 export class RemoteIdentifierService {
@@ -10,5 +11,13 @@ export class RemoteIdentifierService {
     const deviceData =
       await this.remoterepository.createRemoteIdentifier(params);
     return deviceData;
+  }
+
+  async getRemoteIdentifiersByBoundingBox(params: IBoundingBoxData) {
+    return await this.remoterepository.getRemoteIdentifierByBoundingBox(params);
+  }
+
+  async getRemoteIdentifiersByDroneId(params: string) {
+    return await this.remoterepository.getRemoteIdentifierByDroneId(params);
   }
 }
