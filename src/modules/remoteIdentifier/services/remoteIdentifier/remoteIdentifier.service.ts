@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/services/prisma.service';
+import { PrismaService } from '../../../../services/prisma.service';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
+import { IBoundingBoxData } from '../../../../interfaces/remoteIdentifier.interface';
+import { Prisma, Device } from '@prisma/client';
 
 @Injectable()
 export class RemoteIdentifierService {
@@ -13,5 +15,41 @@ export class RemoteIdentifierService {
       },
     });
     return deviceData;
+  }
+
+  async getRemoteIdentifierByBoundingBox(
+    params: IBoundingBoxData,
+  ): Promise<Device[]> {
+    const { minLatitude, maxLatitude, minLongitude, maxLongitude } = params;
+    return this.prismaService.device.findMany({
+      where: {
+        remoteData: {
+          location: {
+            latitude: {
+              gte: minLatitude,
+              lte: maxLatitude,
+            },
+            longitude: {
+              gte: minLongitude,
+              lte: maxLongitude,
+            },
+          },
+        } as unknown as Prisma.JsonFilter<'Device'>,
+      },
+      orderBy: {
+        'remotedata.connection.lastSeen': 'asc',
+      } as unknown as Prisma.DeviceOrderByWithRelationInput,
+    });
+  }
+
+  async getRemoteIdentifierByDroneId(params: string): Promise<Device[]> {
+    return this.prismaService.device.findMany({
+      where: {
+        id: params,
+      },
+      orderBy: {
+        'remotedata.connection.lastSeen': 'asc',
+      } as unknown as Prisma.DeviceOrderByWithRelationInput,
+    });
   }
 }
