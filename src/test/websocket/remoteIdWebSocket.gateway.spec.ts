@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { WebsocketGateway } from './remoteIdWebSocket.gateway';
+import { WebsocketGateway } from '../../web-socket/remoteIdWebSocket/remoteIdWebSocket.gateway';
 import { RemoteIdentifierService } from '../../modules/remoteidentifier/services/remoteIdentifier/remoteIdentifier.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { Socket } from 'socket.io';
