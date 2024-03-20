@@ -36,10 +36,10 @@ describe('WebsocketGateway', () => {
 
   describe('getRemoteIdentifierByDroneId', () => {
     const client: Socket = {} as Socket;
-    const payload = 'droneId';
+    const payload = '61b5ce50-9f4a-46b0-9cae-650baac6593d';
 
     it('should return remote identifiers', async () => {
-      const mockDevices: Device[] = []; // Mock the devices array
+      const mockDevices: Device[] = [];
       (
         remoteIdentifierService.getRemoteIdentifiersByDroneId as jest.Mock
       ).mockResolvedValue(mockDevices);
@@ -60,7 +60,7 @@ describe('WebsocketGateway', () => {
 
       await expect(
         websocketGateway.getRemoteIdentifierByDroneId(client, payload),
-      ).rejects.toThrowError(
+      ).rejects.toThrow(
         new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR),
       );
     });
@@ -69,14 +69,14 @@ describe('WebsocketGateway', () => {
   describe('getRemoteIdentifierByBoundingBox', () => {
     const client: Socket = {} as Socket;
     const payload: IBoundingBoxData = {
-      minLatitude: 0,
-      maxLatitude: 0,
-      minLongitude: 0,
-      maxLongitude: 0,
-    }; // Mock the bounding box data
+      minLatitude: 40.7128,
+      maxLatitude: 49.955,
+      minLongitude: 2.0884,
+      maxLongitude: -8.6491,
+    };
 
     it('should return remote identifiers', async () => {
-      const mockDevices: Device[] = []; // Mock the devices array
+      const mockDevices: Device[] = [];
       (
         remoteIdentifierService.getRemoteIdentifiersByBoundingBox as jest.Mock
       ).mockResolvedValue(mockDevices);
@@ -97,7 +97,7 @@ describe('WebsocketGateway', () => {
 
       await expect(
         websocketGateway.getRemoteIdentifierByBoundingBox(client, payload),
-      ).rejects.toThrowError(
+      ).rejects.toThrow(
         new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR),
       );
     });
