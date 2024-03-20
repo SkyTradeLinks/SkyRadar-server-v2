@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
+import { PrismaService } from '../../../database/prisma.service';
 import { Prisma, Device } from '@prisma/client';
-import { IBoundingBoxData } from 'src/interfaces/remoteIdentifierInterface';
+import { IBoundingBoxData } from '../../../interfaces/remoteIdentifierInterface';
 
 @Injectable()
 export class RemoteIdentifierRepository {

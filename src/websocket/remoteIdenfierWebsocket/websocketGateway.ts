@@ -5,10 +5,10 @@ import {
   // MessageBody,
 } from '@nestjs/websockets';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { RemoteIdentifierService } from 'src/modules/remoteIdentifier/services/remoteIdentifier/remoteIdentifierService';
+import { RemoteIdentifierService } from '../../modules/remoteIdentifier/services/remoteIdentifier/remoteIdentifierService';
 import { Server, Socket } from 'socket.io';
 import { Device } from '@prisma/client';
-import { IBoundingBoxData } from 'src/interfaces/remoteIdentifierInterface';
+import { IBoundingBoxData } from '../../interfaces/remoteIdentifierInterface';
 
 @WebSocketGateway()
 export class WebsocketGateway {

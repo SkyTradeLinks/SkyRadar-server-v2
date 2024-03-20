@@ -1,47 +1,105 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import * as io from 'socket.io-client';
-import { Socket } from 'socket.io-client';
-import { AppModule } from '../../appModule';
-import { INestApplication } from '@nestjs/common';
+import { WebsocketGateway } from './websocketGateway';
+import { RemoteIdentifierService } from '../../modules/remoteIdentifier/services/remoteIdentifier/remoteIdentifierService';
+import { HttpException, HttpStatus } from '@nestjs/common';
+import { Socket } from 'socket.io';
+import { IBoundingBoxData } from '../../interfaces/remoteIdentifierInterface';
+import { Device } from '@prisma/client';
 
 describe('WebsocketGateway', () => {
-  let app: INestApplication;
-  let clientSocket: Socket;
+  let websocketGateway: WebsocketGateway;
+  let remoteIdentifierService: RemoteIdentifierService;
 
-  beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        WebsocketGateway,
+        {
+          provide: RemoteIdentifierService,
+          useValue: {
+            getRemoteIdentifiersByDroneId: jest.fn(),
+            getRemoteIdentifiersByBoundingBox: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
-    await app.listen(3000); // Change the port as per your configuration
-
-    clientSocket = io.connect('http://localhost:3000');
+    websocketGateway = module.get<WebsocketGateway>(WebsocketGateway);
+    remoteIdentifierService = module.get<RemoteIdentifierService>(
+      RemoteIdentifierService,
+    );
   });
 
-  afterAll(async () => {
-    clientSocket.disconnect();
-    await app.close();
+  it('should be defined', () => {
+    expect(websocketGateway).toBeDefined();
   });
 
-  it('should receive and send messages', (done) => {
-    clientSocket.on('connect', () => {
-      // Simulate sending a message from the client
-      clientSocket.emit('sendMessageByDroneId', 'Hello from client');
+  describe('getRemoteIdentifierByDroneId', () => {
+    const client: Socket = {} as Socket;
+    const payload = 'droneId';
 
-      // Wait for message from the server
-      clientSocket.on('sendMessageByDroneId', (message: string) => {
-        expect(message).toEqual('Hello from client');
+    it('should return remote identifiers', async () => {
+      const mockDevices: Device[] = []; // Mock the devices array
+      (
+        remoteIdentifierService.getRemoteIdentifiersByDroneId as jest.Mock
+      ).mockResolvedValue(mockDevices);
 
-        // Send a response back to the client
-        clientSocket.emit('sendMessageByDroneId', 'Hello from server');
-      });
+      const result = await websocketGateway.getRemoteIdentifierByDroneId(
+        client,
+        payload,
+      );
 
-      // Wait for response from the server
-      clientSocket.on('sendMessageByDroneId', (message: string) => {
-        expect(message).toEqual('Hello from server');
-        done(); // Complete the test
-      });
+      expect(result).toEqual(mockDevices);
+    });
+
+    it('should throw an error if service call fails', async () => {
+      const error = new Error('Service call failed');
+      (
+        remoteIdentifierService.getRemoteIdentifiersByDroneId as jest.Mock
+      ).mockRejectedValue(error);
+
+      await expect(
+        websocketGateway.getRemoteIdentifierByDroneId(client, payload),
+      ).rejects.toThrowError(
+        new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR),
+      );
+    });
+  });
+
+  describe('getRemoteIdentifierByBoundingBox', () => {
+    const client: Socket = {} as Socket;
+    const payload: IBoundingBoxData = {
+      minLatitude: 0,
+      maxLatitude: 0,
+      minLongitude: 0,
+      maxLongitude: 0,
+    }; // Mock the bounding box data
+
+    it('should return remote identifiers', async () => {
+      const mockDevices: Device[] = []; // Mock the devices array
+      (
+        remoteIdentifierService.getRemoteIdentifiersByBoundingBox as jest.Mock
+      ).mockResolvedValue(mockDevices);
+
+      const result = await websocketGateway.getRemoteIdentifierByBoundingBox(
+        client,
+        payload,
+      );
+
+      expect(result).toEqual(mockDevices);
+    });
+
+    it('should throw an error if service call fails', async () => {
+      const error = new Error('Service call failed');
+      (
+        remoteIdentifierService.getRemoteIdentifiersByBoundingBox as jest.Mock
+      ).mockRejectedValue(error);
+
+      await expect(
+        websocketGateway.getRemoteIdentifierByBoundingBox(client, payload),
+      ).rejects.toThrowError(
+        new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR),
+      );
     });
   });
 });

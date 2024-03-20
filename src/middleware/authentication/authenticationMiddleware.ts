@@ -4,7 +4,7 @@ import {
   Injectable,
   NestMiddleware,
 } from '@nestjs/common';
-import { configs } from 'src/config';
+import { configs } from '../../config/index';
 import { SIWWeb3 } from '@web3auth/sign-in-with-web3';
 import { Request, Response, NextFunction } from 'express';
 
