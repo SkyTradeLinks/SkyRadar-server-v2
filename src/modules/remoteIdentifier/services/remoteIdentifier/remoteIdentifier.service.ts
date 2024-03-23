@@ -43,13 +43,11 @@ export class RemoteIdentifierService {
   }
 
   async getRemoteIdentifierByDroneId(params: string): Promise<Device[]> {
-    return this.prismaService.device.findMany({
+    console.log(params);
+    return await this.prismaService.device.findMany({
       where: {
         id: params,
       },
-      orderBy: {
-        'remotedata.connection.lastSeen': 'asc',
-      } as unknown as Prisma.DeviceOrderByWithRelationInput,
     });
   }
 }
