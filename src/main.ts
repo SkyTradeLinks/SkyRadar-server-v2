@@ -8,10 +8,7 @@ config();
 
 async function bootstrap() {
   const expressApp = express();
-  const app = await NestFactory.create(
-    AppModule,
-    new ExpressAdapter(expressApp),
-  );
+  const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
     .setTitle('SkyRadar server')
     .setDescription('API is for SkyRadar Server remote indentification')
@@ -20,13 +17,13 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  const port = +process.env.PORT || 5000;
+  const port = +process.env.PORT || 3000;
 
-  await app.listen(port);
+  await app.listen(3000);
 
   console.log(`\n\n
     --------------------------------------------------
-      Server is listening http://localhost:${port}
+      Server is listening ${await app.getUrl()}
     --------------------------------------------------
     \n`);
 }
