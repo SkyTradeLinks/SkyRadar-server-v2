@@ -8,7 +8,7 @@ import { RemoteIdentifierService } from '../../modules/remoteidentifier/services
 import { Server, Socket } from 'socket.io';
 import { IBoundingBoxData } from '../../interfaces/remoteIdentifier.interface';
 
-@WebSocketGateway({cors:true})
+@WebSocketGateway({ cors: true })
 export class WebsocketGateway {
   constructor(
     private readonly remoteIdentifierService: RemoteIdentifierService,
