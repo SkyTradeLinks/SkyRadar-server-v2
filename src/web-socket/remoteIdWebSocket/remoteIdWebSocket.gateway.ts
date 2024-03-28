@@ -8,7 +8,7 @@ import { RemoteIdentifierService } from '../../modules/remoteidentifier/services
 import { Server, Socket } from 'socket.io';
 import { IBoundingBoxData } from '../../interfaces/remoteIdentifier.interface';
 
-@WebSocketGateway()
+@WebSocketGateway({cors:true})
 export class WebsocketGateway {
   constructor(
     private readonly remoteIdentifierService: RemoteIdentifierService,
@@ -23,7 +23,7 @@ export class WebsocketGateway {
         await this.remoteIdentifierService.getRemoteIdentifierByDroneId(
           payload,
         );
-      client.emit('response', droneData);
+      client.emit('droneIdResponse', droneData);
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -39,7 +39,7 @@ export class WebsocketGateway {
         await this.remoteIdentifierService.getRemoteIdentifierByBoundingBox(
           payload,
         );
-      client.emit('response', boundingBoxData);
+      client.emit('boundingBoxResponse', boundingBoxData);
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
