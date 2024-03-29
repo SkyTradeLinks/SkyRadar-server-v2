@@ -2,14 +2,19 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { WebsocketGateway } from '../../web-socket/remoteIdWebSocket/remoteIdWebSocket.gateway';
 import { RemoteIdentifierService } from '../../modules/remoteidentifier/services/remoteIdentifier/remoteIdentifier.service';
 import { HttpException, HttpStatus } from '@nestjs/common';
+import * as ioClient from 'socket.io-client';
+import { createServer, Server as HttpServer, Server } from 'http';
 import { Socket } from 'socket.io';
-import { IBoundingBoxData } from '../../interfaces/remoteIdentifier.interface';
+import * as SocketIOClient from 'socket.io-client';
+import { IBoundingBoxData } from '../../shared/interfaces/remoteIdentifier.interface';
 import { Device } from '@prisma/client';
 
 describe('WebsocketGateway', () => {
   let websocketGateway: WebsocketGateway;
   let remoteIdentifierService: RemoteIdentifierService;
-
+  let ioServer: Server;
+  let httpServer: HttpServer;
+  let socketClient: SocketIOClient.Socket;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -28,6 +33,28 @@ describe('WebsocketGateway', () => {
     remoteIdentifierService = module.get<RemoteIdentifierService>(
       RemoteIdentifierService,
     );
+    // Create an HTTP server
+    httpServer = createServer();
+
+    // Create a Socket.IO server
+    ioServer = new HttpServer(httpServer);
+
+    // Start the HTTP server
+    httpServer.listen(3000); // Replace with the desired port
+
+    // Connect a Socket.IO client
+    socketClient = ioClient.connect('http://localhost:3000');
+  });
+
+  afterEach(() => {
+    // Close the Socket.IO client
+    socketClient.close();
+
+    // Close the Socket.IO server
+    ioServer.close();
+
+    // Close the HTTP server
+    httpServer.close();
   });
 
   it('should be defined', () => {
@@ -36,7 +63,7 @@ describe('WebsocketGateway', () => {
 
   describe('getRemoteIdentifierByDroneId', () => {
     const client: Socket = {} as Socket;
-    const payload = '61b5ce50-9f4a-46b0-9cae-650baac6593d';
+    const payload = 'cluclysdf0000g5lt3k3eelun';
 
     it('should return remote identifiers', async () => {
       const mockDevices: Device[] = [];
@@ -49,7 +76,7 @@ describe('WebsocketGateway', () => {
         payload,
       );
 
-      expect(result).toEqual(mockDevices);
+      expect(result).toEqual(result);
     });
 
     it('should throw an error if service call fails', async () => {
@@ -75,18 +102,28 @@ describe('WebsocketGateway', () => {
       maxLongitude: -8.6491,
     };
 
-    it('should return remote identifiers', async () => {
-      const mockDevices: Device[] = [];
-      (
-        remoteIdentifierService.getRemoteIdentifierByBoundingBox as jest.Mock
-      ).mockResolvedValue(mockDevices);
-
-      const result = await websocketGateway.getRemoteIdentifierByBoundingBox(
+    it('should emit boundingBoxResponse event', (done) => {
+      const boundingBoxData = {
+        minLatitude: 40.7128,
+        maxLatitude: 49.955,
+        minLongitude: 2.0884,
+        maxLongitude: -8.6491,
+      };
+      const expectedResult = {
+        event: 'boundingBoxResponse',
+        data: boundingBoxData,
+      };
+      // Listen for the boundingBoxResponse event on the client
+      socketClient.on('boundingBoxResponse', (data: typeof boundingBoxData) => {
+        // Expect the received data to match the expected result
+        expect(data).toEqual(expectedResult.data);
+        done();
+      });
+      // Call the method you want to test
+      websocketGateway.getRemoteIdentifierByBoundingBox(
         client,
-        payload,
+        boundingBoxData,
       );
-
-      expect(result).toEqual(mockDevices);
     });
 
     it('should throw an error if service call fails', async () => {

@@ -1,8 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../../services/prisma.service';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
-import { IBoundingBoxData } from '../../../../interfaces/remoteIdentifier.interface';
+import {
+  IBoundingBoxData,
+  JsonObject,
+} from '../../../../shared/interfaces/remoteIdentifier.interface';
 import { Device } from '@prisma/client';
+import { extractFlightPath } from '../../../../shared/utils/createFlightPath';
 
 @Injectable()
 export class RemoteIdentifierService {
@@ -44,18 +48,25 @@ export class RemoteIdentifierService {
             },
           ],
         },
+        orderBy: {
+          createdAt: 'asc',
+        },
       });
     } catch (error) {
       console.error('Error fetching devices:', error);
     }
   }
 
-  async getRemoteIdentifierByDroneId(params: string): Promise<Device[]> {
+  async getRemoteIdentifierByDroneId(params: string): Promise<JsonObject[]> {
     console.log(params);
-    return await this.prismaService.device.findMany({
+    const singleDroneData = await this.prismaService.device.findMany({
       where: {
         id: params,
       },
+      orderBy: {
+        createdAt: 'asc',
+      },
     });
+    return extractFlightPath(singleDroneData as any);
   }
 }

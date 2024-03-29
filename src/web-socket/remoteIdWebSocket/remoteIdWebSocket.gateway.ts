@@ -6,7 +6,7 @@ import {
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { RemoteIdentifierService } from '../../modules/remoteidentifier/services/remoteIdentifier/remoteIdentifier.service';
 import { Server, Socket } from 'socket.io';
-import { IBoundingBoxData } from '../../interfaces/remoteIdentifier.interface';
+import { IBoundingBoxData } from '../../shared/interfaces/remoteIdentifier.interface';
 
 @WebSocketGateway({ cors: true })
 export class WebsocketGateway {
