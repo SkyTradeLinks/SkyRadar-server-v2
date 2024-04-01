@@ -1,7 +1,7 @@
 import { JsonObject } from '../interfaces/remoteIdentifier.interface';
 
-export function extractFlightPath(json: JsonObject[]): JsonObject[][] {
-  const collectionHolder: JsonObject[][] = [];
+export function extractFlightPath(json: JsonObject[]): [][] {
+  const collectionHolder: [][] = [];
   json?.forEach((data) => {
     const { latitude, longitude } = data?.remoteData?.location;
     const flightPath = [latitude, longitude];

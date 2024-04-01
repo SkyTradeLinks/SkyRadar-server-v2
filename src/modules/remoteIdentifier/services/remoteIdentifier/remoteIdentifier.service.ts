@@ -1,10 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../../services/prisma.service';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
-import {
-  IBoundingBoxData,
-  JsonObject,
-} from '../../../../shared/interfaces/remoteIdentifier.interface';
+import { IBoundingBoxData } from '../../../../shared/interfaces/remoteIdentifier.interface';
 import { Device } from '@prisma/client';
 import { extractFlightPath } from '../../../../shared/utils/createFlightPath';
 
@@ -57,9 +54,7 @@ export class RemoteIdentifierService {
     }
   }
 
-  async getRemoteIdentifierByDroneMacAddress(
-    params: string,
-  ): Promise<JsonObject[][]> {
+  async getRemoteIdentifierByDroneMacAddress(params: string): Promise<[][]> {
     const singleDroneData = await this.prismaService.device.findMany({
       where: {
         AND: [
