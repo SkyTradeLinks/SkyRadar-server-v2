@@ -20,7 +20,7 @@ export class WebsocketGateway {
   async getRemoteIdentifierByDroneId(client: Socket, payload: string) {
     try {
       const droneData =
-        await this.remoteIdentifierService.getRemoteIdentifierByDroneId(
+        await this.remoteIdentifierService.getRemoteIdentifierByDroneMacAddress(
           payload,
         );
       client.emit('droneIdResponse', droneData);
