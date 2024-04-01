@@ -57,11 +57,17 @@ export class RemoteIdentifierService {
     }
   }
 
-  async getRemoteIdentifierByDroneId(params: string): Promise<JsonObject[]> {
-    console.log(params);
+  async getRemoteIdentifierByDroneId(params: string): Promise<JsonObject[][]> {
     const singleDroneData = await this.prismaService.device.findMany({
       where: {
-        id: params,
+        AND: [
+          {
+            remoteData: {
+              path: ['macAddress'],
+              equals: params,
+            },
+          },
+        ],
       },
       orderBy: {
         createdAt: 'asc',
