@@ -8,7 +8,7 @@ import {
 // import { Device } from '@prisma/client';
 import {
   extractFlightPath,
-  removeDuplicates,
+  fetchUniqueData,
 } from '../../../../shared/utils/createFlightPath';
 
 @Injectable()
@@ -32,9 +32,7 @@ export class RemoteIdentifierService {
     try {
       const getAllData = await this.prismaService.device.findMany();
 
-      const uniqueData = removeDuplicates(
-        getAllData as unknown as JsonObject[],
-      );
+      const uniqueData = fetchUniqueData(getAllData as unknown as JsonObject[]);
 
       const filterData = uniqueData.filter((data: JsonObject) => {
         if (

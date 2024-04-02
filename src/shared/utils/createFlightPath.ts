@@ -22,22 +22,3 @@ export function fetchUniqueData(jsonData: JsonObject[]): JsonObject[] {
 
   return Array.from(uniqueValues) as JsonObject[];
 }
-
-export function removeDuplicates(jsonArray: JsonObject[]): JsonObject[] {
-  const uniqueStrings = new Set();
-  const uniqueJsonArray = jsonArray.filter((jsonObj) => {
-    const jsonString = JSON.stringify(jsonObj);
-    if (uniqueStrings.has(jsonString)) {
-      return false;
-    } else {
-      uniqueStrings.add(jsonString);
-      return true;
-    }
-  });
-
-  const uniqueObjects = uniqueJsonArray.map((jsonString) =>
-    JSON.parse(jsonString as unknown as string),
-  );
-
-  return uniqueObjects;
-}
