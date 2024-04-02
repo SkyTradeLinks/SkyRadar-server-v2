@@ -23,6 +23,8 @@ export class WebsocketGateway {
         await this.remoteIdentifierService.getRemoteIdentifierByDroneMacAddress(
           payload,
         );
+
+      console.log(droneData);
       client.emit('droneIdResponse', droneData);
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);

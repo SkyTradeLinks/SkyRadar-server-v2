@@ -36,7 +36,6 @@ export class RemoteIdentifierService {
       });
 
       const uniqueData = fetchUniqueData(getAllData as unknown as JsonObject[]);
-
       const filterData = uniqueData?.filter((data: JsonObject) => {
         if (
           data?.remoteData.location.latitude > minLatitude &&
