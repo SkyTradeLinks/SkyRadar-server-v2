@@ -28,13 +28,16 @@ export class RemoteIdentifierService {
     params: IBoundingBoxData,
   ): Promise<JsonObject[]> {
     const { minLatitude, maxLatitude, minLongitude, maxLongitude } = params;
-    console.log(params);
     try {
-      const getAllData = await this.prismaService.device.findMany();
+      const getAllData = await this.prismaService?.device?.findMany({
+        orderBy: {
+          createdAt: 'asc',
+        },
+      });
 
       const uniqueData = fetchUniqueData(getAllData as unknown as JsonObject[]);
 
-      const filterData = uniqueData.filter((data: JsonObject) => {
+      const filterData = uniqueData?.filter((data: JsonObject) => {
         if (
           data?.remoteData.location.latitude > minLatitude &&
           data?.remoteData.location.latitude < maxLatitude &&
