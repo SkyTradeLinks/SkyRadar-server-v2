@@ -46,32 +46,6 @@ export class RemoteIdentifierService {
           return data;
         }
       });
-
-      // const boundingBoxUniqueData = await this.prismaService.device.findMany({
-      //   where: {
-      //     AND: [
-      //       {
-      //         remoteData: {
-      //           path: ['location', 'latitude'],
-      //           gte: minLatitude,
-      //           lte: maxLatitude,
-      //           not: 0,
-      //         },
-      //       },
-      //       {
-      //         remoteData: {
-      //           path: ['location', 'longitude'],
-      //           gte: minLongitude,
-      //           lte: maxLongitude,
-      //           not: 0,
-      //         },
-      //       },
-      //     ],
-      //   },
-      //   orderBy: {
-      //     createdAt: 'asc',
-      //   },
-      // });
       return filterData;
     } catch (error) {
       console.error('Error fetching devices:', error);
