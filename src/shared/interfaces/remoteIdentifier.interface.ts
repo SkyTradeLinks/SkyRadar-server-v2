@@ -10,6 +10,7 @@ export interface RemoteData {
     latitude: number;
     longitude: number;
   };
+  macAddress: number;
 }
 
 export interface JsonObject {

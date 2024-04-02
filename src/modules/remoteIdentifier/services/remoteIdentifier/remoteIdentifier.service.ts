@@ -1,9 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../../services/prisma.service';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
-import { IBoundingBoxData } from '../../../../shared/interfaces/remoteIdentifier.interface';
-import { Device } from '@prisma/client';
-import { extractFlightPath } from '../../../../shared/utils/createFlightPath';
+import {
+  IBoundingBoxData,
+  JsonObject,
+} from '../../../../shared/interfaces/remoteIdentifier.interface';
+// import { Device } from '@prisma/client';
+import {
+  extractFlightPath,
+  fetchUniqueData,
+} from '../../../../shared/utils/createFlightPath';
 
 @Injectable()
 export class RemoteIdentifierService {
@@ -20,11 +26,11 @@ export class RemoteIdentifierService {
 
   async getRemoteIdentifierByBoundingBox(
     params: IBoundingBoxData,
-  ): Promise<Device[]> {
+  ): Promise<JsonObject[]> {
     const { minLatitude, maxLatitude, minLongitude, maxLongitude } = params;
     console.log(params);
     try {
-      return await this.prismaService.device.findMany({
+      const boundingBoxUniqueData = await this.prismaService.device.findMany({
         where: {
           AND: [
             {
@@ -49,12 +55,13 @@ export class RemoteIdentifierService {
           createdAt: 'asc',
         },
       });
+      return fetchUniqueData(boundingBoxUniqueData as any);
     } catch (error) {
       console.error('Error fetching devices:', error);
     }
   }
 
-  async getRemoteIdentifierByDroneMacAddress(params: string): Promise<[][]> {
+  async getRemoteIdentifierByDroneMacAddress(params: string): Promise<object> {
     const singleDroneData = await this.prismaService.device.findMany({
       where: {
         AND: [
@@ -70,6 +77,7 @@ export class RemoteIdentifierService {
         createdAt: 'asc',
       },
     });
-    return extractFlightPath(singleDroneData as any);
+    const flightPath = extractFlightPath(singleDroneData as any);
+    return { flightPath };
   }
 }

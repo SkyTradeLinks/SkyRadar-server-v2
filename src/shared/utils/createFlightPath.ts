@@ -10,3 +10,15 @@ export function extractFlightPath(json: JsonObject[]): [][] {
 
   return collectionHolder;
 }
+
+export function fetchUniqueData(jsonData: JsonObject[]): JsonObject[] {
+  const uniqueValues = new Set();
+  for (const obj of jsonData) {
+    if (uniqueValues.has(obj.remoteData?.macAddress)) {
+      continue;
+    }
+    uniqueValues.add(obj);
+  }
+
+  return Array.from(uniqueValues) as JsonObject[];
+}
