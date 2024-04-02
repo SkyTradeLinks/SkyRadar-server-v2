@@ -55,7 +55,7 @@ export class RemoteIdentifierService {
           createdAt: 'asc',
         },
       });
-      return fetchUniqueData(boundingBoxUniqueData as any);
+      return fetchUniqueData(boundingBoxUniqueData as unknown as JsonObject[]);
     } catch (error) {
       console.error('Error fetching devices:', error);
     }
@@ -77,7 +77,9 @@ export class RemoteIdentifierService {
         createdAt: 'asc',
       },
     });
-    const flightPath = extractFlightPath(singleDroneData as any);
+    const flightPath = extractFlightPath(
+      singleDroneData as unknown as JsonObject[],
+    );
     return { flightPath };
   }
 }

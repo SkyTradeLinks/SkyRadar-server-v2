@@ -68,7 +68,7 @@ describe('WebsocketGateway', () => {
     it('should return remote identifiers', async () => {
       const mockDevices: Device[] = [];
       (
-        remoteIdentifierService.getRemoteIdentifierByDroneId as jest.Mock
+        remoteIdentifierService.getRemoteIdentifierByDroneMacAddress as jest.Mock
       ).mockResolvedValue(mockDevices);
 
       const result = await websocketGateway.getRemoteIdentifierByDroneId(
@@ -82,7 +82,7 @@ describe('WebsocketGateway', () => {
     it('should throw an error if service call fails', async () => {
       const error = new Error('Service call failed');
       (
-        remoteIdentifierService.getRemoteIdentifierByDroneId as jest.Mock
+        remoteIdentifierService.getRemoteIdentifierByDroneMacAddress as jest.Mock
       ).mockRejectedValue(error);
 
       await expect(
