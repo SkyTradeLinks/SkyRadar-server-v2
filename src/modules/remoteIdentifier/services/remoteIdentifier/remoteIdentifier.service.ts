@@ -8,7 +8,7 @@ import {
 // import { Device } from '@prisma/client';
 import {
   extractFlightPath,
-  fetchUniqueData,
+  removeDuplicates,
 } from '../../../../shared/utils/createFlightPath';
 
 @Injectable()
@@ -30,32 +30,49 @@ export class RemoteIdentifierService {
     const { minLatitude, maxLatitude, minLongitude, maxLongitude } = params;
     console.log(params);
     try {
-      const boundingBoxUniqueData = await this.prismaService.device.findMany({
-        where: {
-          AND: [
-            {
-              remoteData: {
-                path: ['location', 'latitude'],
-                gte: minLatitude,
-                lte: maxLatitude,
-                not: 0,
-              },
-            },
-            {
-              remoteData: {
-                path: ['location', 'longitude'],
-                gte: minLongitude,
-                lte: maxLongitude,
-                not: 0,
-              },
-            },
-          ],
-        },
-        orderBy: {
-          createdAt: 'asc',
-        },
+      const getAllData = await this.prismaService.device.findMany();
+
+      const uniqueData = removeDuplicates(
+        getAllData as unknown as JsonObject[],
+      );
+
+      const filterData = uniqueData.filter((data: JsonObject) => {
+        if (
+          data?.remoteData.location.latitude > minLatitude &&
+          data?.remoteData.location.latitude < maxLatitude &&
+          data?.remoteData.location.longitude > minLongitude &&
+          data?.remoteData.location.longitude < maxLongitude
+        ) {
+          return data;
+        }
       });
-      return fetchUniqueData(boundingBoxUniqueData as unknown as JsonObject[]);
+
+      // const boundingBoxUniqueData = await this.prismaService.device.findMany({
+      //   where: {
+      //     AND: [
+      //       {
+      //         remoteData: {
+      //           path: ['location', 'latitude'],
+      //           gte: minLatitude,
+      //           lte: maxLatitude,
+      //           not: 0,
+      //         },
+      //       },
+      //       {
+      //         remoteData: {
+      //           path: ['location', 'longitude'],
+      //           gte: minLongitude,
+      //           lte: maxLongitude,
+      //           not: 0,
+      //         },
+      //       },
+      //     ],
+      //   },
+      //   orderBy: {
+      //     createdAt: 'asc',
+      //   },
+      // });
+      return filterData;
     } catch (error) {
       console.error('Error fetching devices:', error);
     }
@@ -80,6 +97,17 @@ export class RemoteIdentifierService {
     const flightPath = extractFlightPath(
       singleDroneData as unknown as JsonObject[],
     );
-    return { flightPath };
+    const returnedMacAddressData = singleDroneData[0] as unknown as JsonObject;
+    const configuredData = {
+      ...returnedMacAddressData,
+      remoteData: {
+        ...returnedMacAddressData?.remoteData,
+        location: {
+          ...returnedMacAddressData?.remoteData.location,
+          flightPath,
+        },
+      },
+    };
+    return configuredData;
   }
 }
