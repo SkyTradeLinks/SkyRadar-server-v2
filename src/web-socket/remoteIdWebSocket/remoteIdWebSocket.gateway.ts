@@ -4,9 +4,9 @@ import {
   SubscribeMessage,
 } from '@nestjs/websockets';
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { RemoteIdentifierService } from '../../modules/remoteidentifier/services/remoteIdentifier/remoteIdentifier.service';
 import { Server, Socket } from 'socket.io';
 import { IBoundingBoxData } from '../../shared/interfaces/remoteIdentifier.interface';
+import { RemoteIdentifierService } from 'src/modules/remoteIdentifier/services/remoteIdentifier/remoteIdentifier.service';
 
 @WebSocketGateway({ cors: true })
 export class WebsocketGateway {
