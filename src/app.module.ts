@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { PrismaExceptionFilter } from './common/filters/prismaException.filter';
-// import { AuthSignatureMiddleware } from './middleware/authSignature.middleware';
 import { RemoteidentifierModule } from './modules/remoteIdentifier/remoteIdentifier.module';
 import { ConfigModule } from '@nestjs/config';
+import { WebsocketModule } from './web-socket/webSocketModule';
 import * as Joi from 'joi';
 
 @Module({
   imports: [
+    RemoteidentifierModule,
+    WebsocketModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
@@ -21,7 +23,6 @@ import * as Joi from 'joi';
         DATABASE_URL: Joi.string().required(),
       }),
     }),
-    RemoteidentifierModule,
   ],
   controllers: [],
   providers: [
