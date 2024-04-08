@@ -33,14 +33,6 @@ By leveraging Socket.io, we can enhance user experience by enabling features suc
 In summary, integrating Socket.io into our Nest.js project enables efficient and real-time communication between the server and clients, ensuring instant updates and interactions, particularly essential for features like live drone tracking and monitoring
 
 
-## Other Component Repositories
-
-- https://github.com/SkyTradeLinks/address-claiming/tree/dev-deploy
-- https://github.com/SkyTradeLinks/solana-rental
-- https://github.com/SkyTradeLinks/backend/tree/dev-deploy
-- https://github.com/SkyTradeLinks/admin_backend
-- https://github.com/SkyTradeLinks/admin_ui
-
 ## Acknowledgments
 
 - [Jonathan Dockrell](https://www.linkedin.com/in/jonathandockrell/)
@@ -48,10 +40,9 @@ In summary, integrating Socket.io into our Nest.js project enables efficient and
 - [Sayantan Modal](https://www.linkedin.com/in/sayantan-mondal-1693101b4/)
 - [Yusuff Jamal](https://www.linkedin.com/in/jamal-yusuff-1a4aa1212/)
 - [Glwadys Fayolle](https://www.linkedin.com/in/glwadysfayolle/)
-- [Peter Akech](https://www.linkedin.com/in/peter-akech-2a777417/)
 - [Emnet Yohannes](https://www.linkedin.com/in/emnet-yohannes-4132bb1a1/)
 - [Chinka Uchenna](https://www.linkedin.com/in/chinka-uchenna-loveday-955a1084)
 
 ## Pitch Deck
 
-Check out our [Pitch Deck](https://docs.google.com/presentation/d/1noBhUjozHX6jM7-iJRwNcAG4YPRead07lQuHpTORFDc/edit) for detailed information about our project, goals, and current fundraising round.
+Check out our [Pitch Deck](https://docs.google.com/presentation/d/1QKGFC1rzmfq2gfGGCehoOTlCrLVp9rz_IftHjV2kc-Y/edit) for detailed information about our project and goals.
