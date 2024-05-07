@@ -35,9 +35,9 @@ export class RemoteIdentifierController {
   async getDronesData(@Body() data: any) {
     const deviiClient = new DeviiClient('https://api.devii.io/auth');
     await deviiClient.login({
-      login: 'chukkyc582@gmail.com',
-      password: 'rainud77@',
-      tenantid: '10151',
+      login: process.env.EMAIL,
+      password: process.env.PASSWORD,
+      tenantid: process.env.TENANTID,
     });
     try {
       const res = await deviiClient.getDroneData(data.query);
