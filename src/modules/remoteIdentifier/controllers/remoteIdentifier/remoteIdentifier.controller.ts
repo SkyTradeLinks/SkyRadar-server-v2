@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
   UseInterceptors,
   UsePipes,
@@ -10,6 +11,7 @@ import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteI
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
 import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
+import { DeviiClient } from 'src/graphQL/deviiClient';
 
 @Controller('remoteIdentifier')
 @ApiTags('remoteIdentifier')
@@ -26,5 +28,22 @@ export class RemoteIdentifierController {
     return this.remoteIdentifierService.createRemoteIdentifierService(
       remotedata,
     );
+  }
+
+  @Get('graphql/getDroneData')
+  @ApiOperation({ summary: 'Fetch drones data' })
+  async getDronesData(@Body() data: any) {
+    const deviiClient = new DeviiClient('https://api.devii.io/auth');
+    await deviiClient.login({
+      login: 'chukkyc582@gmail.com',
+      password: 'rainud77@',
+      tenantid: '10151',
+    });
+    try {
+      const res = await deviiClient.getDroneData(data.query);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
