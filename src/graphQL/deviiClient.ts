@@ -21,8 +21,6 @@ export class DeviiClient {
   }
 
   async getDroneData(query): Promise<any> {
-    console.log('Access_Token', this.accessToken);
-    console.log('Query_Url', this.query_url);
     const queryConfig = {
       headers: {
         'Content-Type': 'application/json',

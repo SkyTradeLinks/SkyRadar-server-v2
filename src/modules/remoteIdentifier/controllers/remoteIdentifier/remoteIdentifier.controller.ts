@@ -10,12 +10,12 @@ import {
 import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteIdentifier.service';
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
-import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
+// import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
 import { DeviiClient } from 'src/graphQL/deviiClient';
 
 @Controller('remoteIdentifier')
 @ApiTags('remoteIdentifier')
-@UseInterceptors(BackendInterceptor)
+// @UseInterceptors(BackendInterceptor)
 export class RemoteIdentifierController {
   constructor(
     private readonly remoteIdentifierService: RemoteIdentifierService,
@@ -43,7 +43,7 @@ export class RemoteIdentifierController {
       const res = await deviiClient.getDroneData(data.query);
       return res;
     } catch (error) {
-      console.log(error);
+      throw new Error('Failed to fetch drone data!!');
     }
   }
 }
