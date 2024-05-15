@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Query,
   UseInterceptors,
   UsePipes,
   ValidationPipe,
@@ -12,38 +13,100 @@ import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
 // import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
 import { DeviiClient } from 'src/graphQL/deviiClient';
+import { ComposeDbClientService } from 'src/compose-db_client/compose-db_client.service';
+// import composedbClient from 'src/compose-db_client/composeDB';
 
+interface Params {
+  lon1: number;
+  lat1: number;
+  lon2: number;
+  lat2: number;
+}
 @Controller('remoteIdentifier')
 @ApiTags('remoteIdentifier')
 // @UseInterceptors(BackendInterceptor)
 export class RemoteIdentifierController {
   constructor(
     private readonly remoteIdentifierService: RemoteIdentifierService,
+    private readonly composeDbClientService: ComposeDbClientService,
   ) {}
   @Post()
   @ApiOperation({ summary: 'Create Remote Identification' })
   @ApiCreatedResponse({ description: 'Remote Identifiction has been created' })
-  @UsePipes(new ValidationPipe())
+  // @UsePipes(new ValidationPipe())
   async createRemoteIdentifier(@Body() remotedata: RemoteIdentifierDto) {
+    console.log('here');
     return this.remoteIdentifierService.createRemoteIdentifierService(
       remotedata,
     );
   }
 
-  @Get('graphql/getDroneData')
+  @Post('/create/remoteData')
+  @ApiOperation({ summary: 'Create Remote Identification ON COMPOSE DB' })
+  @ApiCreatedResponse({ description: 'Remote Identifiction has been created' })
+  // @UsePipes(new ValidationPipe())
+  async createcomposeDB() {
+    // const composeDBClient = new composedbClient();
+
+    return this.composeDbClientService.createRemoteData();
+  }
+
+  @Get('/getRemoteData')
   @ApiOperation({ summary: 'Fetch drones data' })
-  async getDronesData(@Body() data: any) {
-    const deviiClient = new DeviiClient('https://api.devii.io/auth');
-    await deviiClient.login({
-      login: process.env.EMAIL,
-      password: process.env.PASSWORD,
-      tenantid: process.env.TENANTID,
-    });
-    try {
-      const res = await deviiClient.getDroneData(data.query);
-      return res;
-    } catch (error) {
-      throw new Error('Failed to fetch drone data!!');
-    }
+  async getRemoteData(
+    @Query('lon1') lon1: number,
+    @Query('lat1') lat1: number,
+    @Query('lon2') lon2: number,
+    @Query('lat2') lat2: number,
+  ) {
+    const params: Params = {
+      lon1,
+      lat1,
+      lon2,
+      lat2,
+    };
+    console.log('here', params);
+
+    return await this.composeDbClientService.getDroneData(params);
+  }
+
+  @Get('/getDrones')
+  @ApiOperation({ summary: 'Fetch drones data' })
+  async getDrones(
+    @Query('lon1') lon1: number,
+    @Query('lat1') lat1: number,
+    @Query('lon2') lon2: number,
+    @Query('lat2') lat2: number,
+    @Query('page') page: number,
+  ) {
+    const params = {
+      lon1,
+      lat1,
+      lon2,
+      lat2,
+      page: parseInt(page.toString()),
+    };
+    console.log('here', params);
+
+    return await this.remoteIdentifierService.getDrones(params);
+  }
+
+  @Get('/getDroneData')
+  @ApiOperation({ summary: 'Fetch drones data' })
+  async getDroneData(
+    @Query('lon1') lon1: number,
+    @Query('lat1') lat1: number,
+    @Query('lon2') lon2: number,
+    @Query('lat2') lat2: number,
+  ) {
+    const params: Params = {
+      lon1,
+      lat1,
+      lon2,
+      lat2,
+    };
+    console.log('here', params);
+
+    return await this.remoteIdentifierService.getDroneData(params);
   }
 }

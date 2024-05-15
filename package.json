@@ -1,14 +1,7 @@
 {
-  "name": "skytrade",
-  "version": "0.0.1",
+  "name": "skyradar-server-v2",
+  "version": "1.0.0",
   "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
-  "engines": {
-    "node": "20.11.1",
-    "npm": "10.2.4"
-  },
   "scripts": {
     "build": "nest build",
     "db:migration": "prisma generate && prisma migrate deploy",
@@ -30,9 +23,14 @@
     "prisma:studio": "npx prisma studio"
   },
   "dependencies": {
+    "@ceramicnetwork/http-client": "^5.10.0",
+    "@composedb/client": "^0.7.1",
+    "@composedb/devtools-node": "^0.7.1",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.0",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/graphql": "^12.1.1",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^7.3.0",
     "@prisma/client": "^5.11.0",
@@ -40,13 +38,18 @@
     "@web3auth/sign-in-with-web3": "^3.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "dids": "^5.0.2",
     "dotenv": "^16.4.5",
     "joi": "^17.12.2",
+    "key-did-provider-ed25519": "^4.0.2",
+    "key-did-resolver": "^4.0.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "uint8arrays": "^5.0.3"
   },
   "devDependencies": {
+    "@composedb/types": "^0.7.1",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
@@ -86,5 +89,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

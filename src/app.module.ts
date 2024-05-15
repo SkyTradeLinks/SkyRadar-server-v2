@@ -4,6 +4,7 @@ import { PrismaExceptionFilter } from './common/filters/prismaException.filter';
 import { AuthSignatureMiddleware } from './middleware/authSignature.middleware';
 import { RemoteidentifierModule } from './modules/remoteIdentifier/remoteIdentifier.module';
 import { ConfigModule } from '@nestjs/config';
+import { ComposeDbClientModule } from './compose-db_client/compose-db_client.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -22,6 +23,7 @@ import * as Joi from 'joi';
       }),
     }),
     RemoteidentifierModule,
+    ComposeDbClientModule,
   ],
   controllers: [],
   providers: [
@@ -32,10 +34,10 @@ import * as Joi from 'joi';
   ],
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthSignatureMiddleware).forRoutes({
-      path: 'remoteIdentifier',
-      method: RequestMethod.POST,
-    });
-  }
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer.apply(AuthSignatureMiddleware).forRoutes({
+  //     path: 'remoteIdentifier',
+  //     method: RequestMethod.POST,
+  //   });
+  // }
 }
