@@ -30,7 +30,7 @@ export class ComposeDbClientService {
     await did.authenticate();
 
     // Replace by the URL of the Ceramic node you want to deploy the Models to
-    const ceramic = new CeramicClient('http://localhost:7007');
+    const ceramic = new CeramicClient(process.env.CERAMIC_NODE_CONNECTION);
     // An authenticated DID with admin access must be set on the Ceramic instance
     ceramic.did = did;
 
