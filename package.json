@@ -30,12 +30,17 @@
     "prisma:studio": "npx prisma studio"
   },
   "dependencies": {
+    "@ceramicnetwork/http-client": "^5.10.0",
+    "@composedb/client": "^0.7.1",
+    "@composedb/devtools-node": "^0.7.1",
     "@nestjs/common": "^10.0.0",
+    "@nestjs/graphql": "^12.1.1",
     "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/platform-socket.io": "^10.3.4",
     "@nestjs/swagger": "^7.3.0",
+    "@nestjs/throttler": "^5.1.2",
     "@nestjs/websockets": "^10.3.4",
     "@prisma/client": "^5.11.0",
     "@solana/web3.js": "^1.91.1",
@@ -49,6 +54,7 @@
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
+    "@composedb/types": "^0.7.1",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.3.4",
