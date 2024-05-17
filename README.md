@@ -1,75 +1,48 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Drone Radar Server
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Overview
 
-Code demo: https://www.loom.com/share/1f24d0d24dc54f2e9e5535b5f7ff7a9e?sid=516ef703-3ff6-4476-bf70-6a034468b094
+This NestJS application provides a backend service for managing drone historical data through HTTP and WebSocket interfaces. It consists of:
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### HTTP Endpoint (`/remoteIdentifier`)
 
-## Description
+- This endpoint is used to insert drone remote data into a PostgreSQL database. It accepts JSON payloads representing drone data and is primarily designed for storing historical drone information.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### WebSocket Endpoint (`/droneIdSocket`)
 
-## Installation
+- This WebSocket endpoint subscribes to the `sendMessageByDroneId` message. It receives a drone MAC address as a payload and emits a `droneIdResponse` message containing historical data associated with the specified drone.
 
-```bash
-$ yarn install
-```
+### WebSocket Endpoint (`/boundingBoxSocket`)
 
-## Running the app
+- This WebSocket endpoint subscribes to the `sendMessageByBoundingBox` message. It receives bounding box coordinates (`minLatitude`, `maxLatitude`, `minLongitude`, `maxLongitude`) and emits a `boundingBoxResponse` message containing a list of drones within the specified geographical area.
 
-```bash
-# development
-$ yarn start
 
-# watch mode
-$ yarn start:dev
+## Technology Stack
 
-# production mode
-$ yarn start:prod
-```
+- [Next.js](https://nextjs.org/)
+- [Node.js](https://nodejs.org/)
+- [Express.js](https://expressjs.com/)
+- [cors](https://github.com/expressjs/cors)
+- [socket.io](https://socket.io/)
 
-## Test
 
-```bash
-# unit tests
-$ yarn test
+### Web Socket Integration
 
-# e2e tests
-$ yarn test:e2e
+By leveraging Socket.io, we can enhance user experience by enabling features such as live updates on drone locations and flight paths. This integration allows us to implement dynamic, real-time tracking of drones using our radar app. Users can view drone movements instantly on the map, powered by Mapbox. Socket.io ensures that clients receive immediate updates on drone positions, altitude, speed, and direction, providing accurate and timely information to enhance monitoring capabilities.
 
-# test coverage
-$ yarn test:cov
-```
+In summary, integrating Socket.io into our Nest.js project enables efficient and real-time communication between the server and clients, ensuring instant updates and interactions, particularly essential for features like live drone tracking and monitoring
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Acknowledgments
 
-## Stay in touch
+- [Jonathan Dockrell](https://www.linkedin.com/in/jonathandockrell/)
+- [Marcin Zduniak](https://www.linkedin.com/in/marcinzduniak/)
+- [Sayantan Modal](https://www.linkedin.com/in/sayantan-mondal-1693101b4/)
+- [Yusuff Jamal](https://www.linkedin.com/in/jamal-yusuff-1a4aa1212/)
+- [Glwadys Fayolle](https://www.linkedin.com/in/glwadysfayolle/)
+- [Emnet Yohannes](https://www.linkedin.com/in/emnet-yohannes-4132bb1a1/)
+- [Chinka Uchenna](https://www.linkedin.com/in/chinka-uchenna-loveday-955a1084)
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Pitch Deck
 
-## License
-
-Nest is [MIT licensed](LICENSE).
+Check out our [Pitch Deck](https://docs.google.com/presentation/d/1QKGFC1rzmfq2gfGGCehoOTlCrLVp9rz_IftHjV2kc-Y/edit) for detailed information about our project and goals.

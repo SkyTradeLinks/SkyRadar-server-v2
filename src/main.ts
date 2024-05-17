@@ -12,6 +12,11 @@ async function bootstrap() {
     AppModule,
     new ExpressAdapter(expressApp),
   );
+
+  app.enableCors({
+    origin: '*',
+  });
+
   const config = new DocumentBuilder()
     .setTitle('SkyRadar server')
     .setDescription('API is for SkyRadar Server remote indentification')

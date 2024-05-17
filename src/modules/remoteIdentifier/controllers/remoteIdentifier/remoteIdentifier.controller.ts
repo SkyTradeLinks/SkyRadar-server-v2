@@ -2,18 +2,18 @@ import {
   Body,
   Controller,
   Post,
-  UseInterceptors,
+  // UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteIdentifier.service';
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
-import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
+// import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
 
 @Controller('remoteIdentifier')
 @ApiTags('remoteIdentifier')
-@UseInterceptors(BackendInterceptor)
+// @UseInterceptors(BackendInterceptor)
 export class RemoteIdentifierController {
   constructor(
     private readonly remoteIdentifierService: RemoteIdentifierService,
