@@ -7,7 +7,7 @@ import { definition } from './remoteDrone';
 @Injectable()
 export class ComposeDbClientService {
   constructor() {}
-  async createRemoteData() {
+  async createRemoteData(remoteData) {
     const { ComposeClient } = await eval(`import('@composedb/client')`);
 
     const { CeramicClient } = await eval(
@@ -49,14 +49,14 @@ export class ComposeDbClientService {
     mutation CreateRemoteData{
       createRemoteData(input: {
         content: {
-          macAddress: "106:39:569:79:90:A8",
+          macAddress: "${remoteData.macAddress}",
           lastSeen: "${lastSeen}",
           firstSeen: "${firstSeen}",
-          transportType: "BLUETOOTH",
-          status: AIRBORNE,
-          created: "2024-05-09T12:00:00Z"
-          longitude: -1254.6194
-          latitude: 78.7749
+          transportType: "${remoteData.transportType}",
+          status: ${remoteData.status},
+          created: "${now}"
+          longitude: ${remoteData.lon}
+          latitude: ${remoteData.lat}
 
         }
       }){
@@ -73,7 +73,6 @@ export class ComposeDbClientService {
       }
     }
   `);
-    console.log(' Drone signal successfull!!', createDrone);
 
     return createDrone;
   }

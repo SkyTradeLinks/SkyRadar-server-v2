@@ -14,14 +14,20 @@ import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
 // import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
 import { ComposeDbClientService } from 'src/compose-db_client/compose-db_client.service';
-// import composedbClient from 'src/compose-db_client/composeDB';
-import { ApiKeyThrottlerGuard } from './throttle-guard';
 
 interface Params {
   lon1: number;
   lat1: number;
   lon2: number;
   lat2: number;
+}
+
+interface RemoteData {
+  macAddress: string;
+  transportType: string;
+  status: string;
+  lon: number;
+  lat: number;
 }
 
 @Controller('remoteIdentifier')
@@ -45,11 +51,8 @@ export class RemoteIdentifierController {
   @Post('/create/remoteData')
   @ApiOperation({ summary: 'Create Remote Identification ON COMPOSE DB' })
   @ApiCreatedResponse({ description: 'Remote Identifiction has been created' })
-  // @UsePipes(new ValidationPipe())
-  async createcomposeDB() {
-    // const composeDBClient = new composedbClient();
-
-    return this.composeDbClientService.createRemoteData();
+  async createcomposeDB(@Body() remoteData: RemoteData) {
+    return this.composeDbClientService.createRemoteData(remoteData);
   }
 
   @Get('/getRemoteData')
@@ -66,7 +69,6 @@ export class RemoteIdentifierController {
       lon2,
       lat2,
     };
-    console.log('here', params);
 
     return await this.composeDbClientService.getDroneData(params);
   }
@@ -87,7 +89,6 @@ export class RemoteIdentifierController {
       lat2,
       page: parseInt(page.toString()),
     };
-    console.log('here', params);
 
     return await this.remoteIdentifierService.getDrones(params);
   }
@@ -106,7 +107,6 @@ export class RemoteIdentifierController {
       lon2,
       lat2,
     };
-    console.log('here', params);
 
     return await this.remoteIdentifierService.getDroneData(params);
   }

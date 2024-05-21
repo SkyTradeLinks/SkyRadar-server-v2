@@ -22,17 +22,7 @@ export class ApiKeyThrottlerGuard extends ThrottlerGuard {
     } else if (subscriptionPlan === 'premium') {
       throttlerOptions.limit = 30; // apply a limit of 200 requests per minute for premium plan
     }
-    console.log(
-      super.handleRequest(
-        context,
-        throttlerOptions.limit,
-        throttlerOptions.ttl,
-        throttlerOptions,
-        () => undefined, // getTracker
-        () => undefined, // generateKey
-      ),
-    );
-    console.log('Testing prem');
+
     return super.handleRequest(
       context,
       throttlerOptions.limit,
