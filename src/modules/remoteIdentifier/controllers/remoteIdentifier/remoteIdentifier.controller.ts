@@ -12,7 +12,7 @@ import {
 import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteIdentifier.service';
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
-// import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
+import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
 import { ComposeDbClientService } from 'src/compose-db_client/compose-db_client.service';
 
 interface Params {
@@ -22,17 +22,9 @@ interface Params {
   lat2: number;
 }
 
-interface RemoteData {
-  macAddress: string;
-  transportType: string;
-  status: string;
-  lon: number;
-  lat: number;
-}
-
 @Controller('remoteIdentifier')
 @ApiTags('remoteIdentifier')
-// @UseInterceptors(BackendInterceptor)
+@UseInterceptors(BackendInterceptor)
 export class RemoteIdentifierController {
   constructor(
     private readonly remoteIdentifierService: RemoteIdentifierService,
@@ -46,13 +38,6 @@ export class RemoteIdentifierController {
     return this.remoteIdentifierService.createRemoteIdentifierService(
       remotedata,
     );
-  }
-
-  @Post('/create/remoteData')
-  @ApiOperation({ summary: 'Create Remote Identification ON COMPOSE DB' })
-  @ApiCreatedResponse({ description: 'Remote Identifiction has been created' })
-  async createcomposeDB(@Body() remoteData: RemoteData) {
-    return this.composeDbClientService.createRemoteData(remoteData);
   }
 
   @Get('/getRemoteData')
