@@ -1,0 +1,20 @@
+enum Status {
+  AIRBORNE
+  STATIONARY
+}
+type RemoteData
+  @createModel(accountRelation: LIST, description: "A simple Drone signals")
+  @createIndex(fields: [{ path: "status" }])
+  @createIndex(fields: [{ path: "longitude" }])
+  @createIndex(fields: [{ path: "latitude" }])
+  @createIndex(fields: [{ path: "firstSeen" }])
+  @createIndex(fields: [{ path: "lastSeen" }]) {
+  macAddress: String! @string(minLength: 1, maxLength: 100)
+  lastSeen: String! @string(minLength: 1, maxLength: 100)
+  firstSeen: String! @string(minLength: 1, maxLength: 100)
+  transportType: String! @string(minLength: 1, maxLength: 100)
+  longitude: Float!
+  latitude: Float!
+  status: Status!
+  created: DateTime!
+}

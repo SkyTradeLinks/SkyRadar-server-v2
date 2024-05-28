@@ -1,22 +1,34 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
-  // UseInterceptors,
+  Query,
+  UseInterceptors,
   UsePipes,
+  UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteIdentifier.service';
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
-// import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
+import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
+import { ComposeDbClientService } from 'src/compose-db_client/compose-db_client.service';
+
+interface Params {
+  lon1: number;
+  lat1: number;
+  lon2: number;
+  lat2: number;
+}
 
 @Controller('remoteIdentifier')
 @ApiTags('remoteIdentifier')
-// @UseInterceptors(BackendInterceptor)
+@UseInterceptors(BackendInterceptor)
 export class RemoteIdentifierController {
   constructor(
     private readonly remoteIdentifierService: RemoteIdentifierService,
+    private readonly composeDbClientService: ComposeDbClientService,
   ) {}
   @Post()
   @ApiOperation({ summary: 'Create Remote Identification' })
@@ -26,5 +38,61 @@ export class RemoteIdentifierController {
     return this.remoteIdentifierService.createRemoteIdentifierService(
       remotedata,
     );
+  }
+
+  @Get('/getRemoteData')
+  @ApiOperation({ summary: 'Fetch drones data' })
+  async getRemoteData(
+    @Query('lon1') lon1: number,
+    @Query('lat1') lat1: number,
+    @Query('lon2') lon2: number,
+    @Query('lat2') lat2: number,
+  ) {
+    const params: Params = {
+      lon1,
+      lat1,
+      lon2,
+      lat2,
+    };
+
+    return await this.composeDbClientService.getDroneData(params);
+  }
+
+  @Get('/getDrones')
+  @ApiOperation({ summary: 'Fetch drones data' })
+  async getDrones(
+    @Query('lon1') lon1: number,
+    @Query('lat1') lat1: number,
+    @Query('lon2') lon2: number,
+    @Query('lat2') lat2: number,
+    @Query('page') page: number,
+  ) {
+    const params = {
+      lon1,
+      lat1,
+      lon2,
+      lat2,
+      page: parseInt(page.toString()),
+    };
+
+    return await this.remoteIdentifierService.getDrones(params);
+  }
+
+  @Get('/getDroneData')
+  @ApiOperation({ summary: 'Fetch drones data' })
+  async getDroneData(
+    @Query('lon1') lon1: number,
+    @Query('lat1') lat1: number,
+    @Query('lon2') lon2: number,
+    @Query('lat2') lat2: number,
+  ) {
+    const params: Params = {
+      lon1,
+      lat1,
+      lon2,
+      lat2,
+    };
+
+    return await this.remoteIdentifierService.getDroneData(params);
   }
 }

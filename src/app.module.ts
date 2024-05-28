@@ -4,6 +4,7 @@ import { PrismaExceptionFilter } from './common/filters/prismaException.filter';
 import { RemoteidentifierModule } from './modules/remoteIdentifier/remoteIdentifier.module';
 import { ConfigModule } from '@nestjs/config';
 import { WebsocketModule } from './web-socket/webSocketModule';
+import { AirRightsModule } from './modules/air-rights/air-rights.module';
 import * as Joi from 'joi';
 
 @Module({
@@ -23,6 +24,7 @@ import * as Joi from 'joi';
         DATABASE_URL: Joi.string().required(),
       }),
     }),
+    AirRightsModule,
   ],
   controllers: [],
   providers: [

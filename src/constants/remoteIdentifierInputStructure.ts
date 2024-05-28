@@ -23,7 +23,7 @@ const remoteIdentifierInputStructure = {
     },
     location: {
       height: 80,
-      status: 'Airborne',
+      status: 'AIRBORNE',
       distance: 5043501,
       latitude: 51.4791,
       direction: 361,

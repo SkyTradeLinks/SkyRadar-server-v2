@@ -5,7 +5,7 @@ import {
   IBoundingBoxData,
   JsonObject,
 } from '../../../../shared/interfaces/remoteIdentifier.interface';
-// import { Device } from '@prisma/client';
+import { ComposeDbClientService } from 'src/compose-db_client/compose-db_client.service';
 import {
   extractFlightPath,
   fetchUniqueData,
@@ -13,7 +13,10 @@ import {
 
 @Injectable()
 export class RemoteIdentifierService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(
+    private prismaService: PrismaService,
+    private composeDbClientService: ComposeDbClientService,
+  ) {}
 
   async createRemoteIdentifierService(params: RemoteIdentifierDto) {
     const deviceData = await this.prismaService.device.create({
@@ -21,6 +24,13 @@ export class RemoteIdentifierService {
         remoteData: params.remoteData,
       },
     });
+    try {
+      const data = this.composeDbClientService.createRemoteData(
+        params.remoteData,
+      );
+    } catch (error) {
+      throw new Error('Failed to create signal on composeDB!!');
+    }
     return deviceData;
   }
 
@@ -83,5 +93,56 @@ export class RemoteIdentifierService {
       },
     };
     return configuredData;
+  }
+
+  async getDroneData(params) {
+    const deviceData = await this.prismaService.device.aggregate({
+      _count: true,
+      where: {
+        OR: [
+          {
+            remoteData: {
+              path: ['location', 'longitude'],
+              equals: parseFloat(params.lon1),
+            },
+          },
+          {
+            remoteData: {
+              path: ['location', 'longitude'],
+              equals: parseFloat(params.lon2),
+            },
+          },
+        ],
+      },
+    });
+    return deviceData;
+  }
+
+  async getDrones(params) {
+    const results = await this.prismaService.device.findMany({
+      skip: params.page === 1 ? 0 : params.page * 10,
+      take: 10,
+      where: {
+        OR: [
+          {
+            remoteData: {
+              path: ['location', 'longitude'],
+              equals: parseFloat(params.lon1),
+            },
+          },
+          {
+            remoteData: {
+              path: ['location', 'longitude'],
+              equals: parseFloat(params.lon2),
+            },
+          },
+        ],
+      },
+    });
+    console.log(results.length);
+
+    return {
+      _count: results.length,
+    };
   }
 }
