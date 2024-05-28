@@ -6,21 +6,14 @@ import {
   Query,
   UseInterceptors,
   UsePipes,
-  UseGuards,
   ValidationPipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteIdentifier.service';
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
 import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
 import { ComposeDbClientService } from 'src/compose-db_client/compose-db_client.service';
-
-interface Params {
-  lon1: number;
-  lat1: number;
-  lon2: number;
-  lat2: number;
-}
 
 @Controller('remoteIdentifier')
 @ApiTags('remoteIdentifier')
@@ -30,7 +23,7 @@ export class RemoteIdentifierController {
     private readonly remoteIdentifierService: RemoteIdentifierService,
     private readonly composeDbClientService: ComposeDbClientService,
   ) {}
-  @Post()
+  @Post('/store-drone-signal')
   @ApiOperation({ summary: 'Create Remote Identification' })
   @ApiCreatedResponse({ description: 'Remote Identifiction has been created' })
   @UsePipes(new ValidationPipe())
@@ -40,59 +33,55 @@ export class RemoteIdentifierController {
     );
   }
 
-  @Get('/getRemoteData')
+  @Get('/get-ceramic-drone-data')
   @ApiOperation({ summary: 'Fetch drones data' })
-  async getRemoteData(
-    @Query('lon1') lon1: number,
-    @Query('lat1') lat1: number,
-    @Query('lon2') lon2: number,
-    @Query('lat2') lat2: number,
+  async getCeramicDroneData(
+    @Query('lon1') lon1: string,
+    @Query('lat1') lat1: string,
+    @Query('lon2') lon2: string,
+    @Query('lat2') lat2: string,
   ) {
-    const params: Params = {
+    return await this.composeDbClientService.getCeramicDroneData({
       lon1,
       lat1,
       lon2,
       lat2,
-    };
-
-    return await this.composeDbClientService.getDroneData(params);
+    });
   }
 
-  @Get('/getDrones')
+  @Get('/get-sql-drone-data')
   @ApiOperation({ summary: 'Fetch drones data' })
-  async getDrones(
-    @Query('lon1') lon1: number,
-    @Query('lat1') lat1: number,
-    @Query('lon2') lon2: number,
-    @Query('lat2') lat2: number,
-    @Query('page') page: number,
+  async getSqlDroneData(
+    @Query('lon1') lon1: string,
+    @Query('lat1') lat1: string,
+    @Query('lon2') lon2: string,
+    @Query('lat2') lat2: string,
+    @Query('page', ParseIntPipe) page: number,
+    @Query('page', ParseIntPipe) limit: number,
   ) {
-    const params = {
+    return await this.remoteIdentifierService.getSqlDroneData({
       lon1,
       lat1,
       lon2,
       lat2,
-      page: parseInt(page.toString()),
-    };
-
-    return await this.remoteIdentifierService.getDrones(params);
+      page,
+      limit,
+    });
   }
 
-  @Get('/getDroneData')
+  @Get('/get-drone-aggregate')
   @ApiOperation({ summary: 'Fetch drones data' })
-  async getDroneData(
+  async getAggregateDroneData(
     @Query('lon1') lon1: number,
     @Query('lat1') lat1: number,
     @Query('lon2') lon2: number,
     @Query('lat2') lat2: number,
   ) {
-    const params: Params = {
+    return await this.remoteIdentifierService.getAggregateDroneData({
       lon1,
       lat1,
       lon2,
       lat2,
-    };
-
-    return await this.remoteIdentifierService.getDroneData(params);
+    });
   }
 }

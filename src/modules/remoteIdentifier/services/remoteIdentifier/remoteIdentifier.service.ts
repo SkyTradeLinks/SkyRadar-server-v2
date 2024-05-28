@@ -24,14 +24,15 @@ export class RemoteIdentifierService {
         remoteData: params.remoteData,
       },
     });
+    let ceramicData = null;
     try {
-      const data = this.composeDbClientService.createRemoteData(
+      ceramicData = await this.composeDbClientService.createRemoteData(
         params.remoteData,
       );
     } catch (error) {
       throw new Error('Failed to create signal on composeDB!!');
     }
-    return deviceData;
+    return { deviceData, ceramicData };
   }
 
   async getRemoteIdentifierByBoundingBox(
@@ -95,7 +96,7 @@ export class RemoteIdentifierService {
     return configuredData;
   }
 
-  async getDroneData(params) {
+  async getAggregateDroneData(params) {
     const deviceData = await this.prismaService.device.aggregate({
       _count: true,
       where: {
@@ -118,7 +119,14 @@ export class RemoteIdentifierService {
     return deviceData;
   }
 
-  async getDrones(params) {
+  async getSqlDroneData(params: {
+    lon1: string;
+    lat1: string;
+    lon2: string;
+    lat2: string;
+    page: number;
+    limit: number;
+  }) {
     const results = await this.prismaService.device.findMany({
       skip: params.page === 1 ? 0 : params.page * 10,
       take: 10,

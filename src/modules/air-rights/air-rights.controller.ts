@@ -3,7 +3,6 @@ import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { AirRightsService } from './air-rights.service';
 import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
 
-
 @ApiTags('Air-rights Price')
 @Controller('air-rights')
 @UseInterceptors(BackendInterceptor)

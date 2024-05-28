@@ -45,7 +45,12 @@ export class ComposeDbClientService {
     }
   }
 
-  async getDroneData(params) {
+  async getCeramicDroneData(params: {
+    lon1: string;
+    lat1: string;
+    lon2: string;
+    lat2: string;
+  }) {
     try {
       const compose = await new Ceramic().composeDB();
 
