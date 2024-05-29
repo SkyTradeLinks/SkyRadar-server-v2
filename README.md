@@ -1,7 +1,7 @@
 # SkyTrade Drones Radar
-deployed url: https://drive.google.com/file/d/1TgJI5ASaW2Kcxr3QfJ99pQ3E0QymQFbo/view?usp=sharing
+Android APK for download: https://drive.google.com/file/d/1TgJI5ASaW2Kcxr3QfJ99pQ3E0QymQFbo/view?usp=sharing
 
-The SkyRadar app collects RemoteID data from nearby drones using BRID. The data collected by the app is sent to our server where it is aggregated and analysed. SkyRadar utilizes Google Maps and Google Places for mapping and place predictions implementation respectively. An explainer video of how our app works is added below
+The SkyRadar app collects RemoteID data from nearby drones using BRID. The data collected by the app is sent to our server, where it is aggregated and analyzed. SkyRadar uses Google Maps and Google Places for mapping and place prediction implementation. An explainer video of how our app works is added below
 
 <div>
     <a href="https://www.loom.com/share/1132ef4f66114cc3ab1666e7c43fa374">
@@ -16,24 +16,24 @@ The SkyRadar app collects RemoteID data from nearby drones using BRID. The data 
 # SkyTrade Drones Real-Time API
 
 ## Overview
-deployed url: https://devradar.sky.trade/
+API domain: https://devradar.sky.trade
 
-The API collects, stores and aggregates data from the SkyTrade Drones Radar app. It is a NestJS application that provides a backend service for managing drone historical data through HTTP and WebSocket interfaces. It consists and built together with:
-- Ceramic/ComposeDB: A decentralized database network that plays an important role in our application's data management. By leveraging this technology, we ensure that our drone historical data is stored in a secure, transparent, and highly available manner. ComposeDB's decentralized architecture allows for real-time data synchronization and validation, making it an ideal solution for our use case. With Ceramic/ComposeDB, we can confidently store and manage large amounts of data while maintaining the highest levels of data integrity and security.
+The API collects, stores, and aggregates SkyTrade Drones Radar app data. The NestJS application provides a backend service for managing drone historical data through HTTP and WebSocket interfaces. It consists of and is built together with:
+- Ceramic/ComposeDB: A decentralized database network that plays an important role in our application's data management. By leveraging this technology, we ensure that our drone's historical data is stored securely, transparently, and highly available. ComposeDB's decentralized architecture allows real-time data synchronization and validation, making it an ideal solution for our use case. With Ceramic/ComposeDB, we can confidently store and manage large amounts of data while maintaining the highest data integrity and security levels.
 
 - How we use it:
   A  GraphQL model is designed with the data structure of the drone signals that is sent to a Ceramic node, this data is indexed for easy access and also for proper filtering.
-  This model is deployed on a Ceramic server running on AWS. This makes it easy for the signals to be readily available for use.
-  During a request, A GraphQL query is sent directly to the Ceramic server and since the model is indexed, this makes the response time more faster than regular REST API.
-- API Response includes but not limited to:
+  This model is deployed on a Ceramic server running on AWS, which makes the signals readily available for use.
+  During a request, a GraphQL query is sent directly to the Ceramic server. Since the model is indexed, this makes the response time faster than a regular REST API.
+- API Response includes but is not limited to:
 1, Specific macAddress that signifies each drone.
-2, The current location the drones.
+2, The current location of the drones.
 3, The timestamp when the signal was created.
 4, The timestamp of when a drone was last seen at a particular land area.
 
 ### HTTP Endpoint (`/remoteIdentifier`)
 
-- This endpoint is used to insert drone remote data into a PostgreSQL/composeDB database. It accepts JSON payloads representing drone data and is primarily designed for storing historical drone information.
+- This endpoint inserts drone remote data into a PostgreSQL/composeDB database. It accepts JSON payloads representing drone data and is primarily designed to store historical drone information.
 -  Remote_ID Data Structure:
 -  [remote_ID.json](https://github.com/SkyTradeLinks/SkyRadar-server-v2/files/15483650/remote_ID.json)
 
@@ -43,8 +43,8 @@ The API collects, stores and aggregates data from the SkyTrade Drones Radar app.
 ### HTTP Endpoint(`/get-ceramic-drone-data`)
   -query-params(lon1, lat1, lon2, lat2)
   
-  - This enpoint is used to fetch available drones in a land area.
-  - Postman Api specification:
+  - This endpoint is used to fetch available drones in a land area.
+  - Postman API specification:
   - [Sky-Radar-Server.postman_collection.json](https://github.com/SkyTradeLinks/SkyRadar-server-v2/files/15483569/Sky-Radar-Server.postman_collection.json)
 
 ### WebSocket Endpoint (`/droneIdSocket`)
@@ -70,7 +70,7 @@ The API collects, stores and aggregates data from the SkyTrade Drones Radar app.
 
 By leveraging Socket.io, we can enhance user experience by enabling features such as live updates on drone locations and flight paths. This integration allows us to implement dynamic, real-time tracking of drones using our radar app. Users can view drone movements instantly on the map, powered by Mapbox. Socket.io ensures that clients receive immediate updates on drone positions, altitude, speed, and direction, providing accurate and timely information to enhance monitoring capabilities.
 
-In summary, integrating Socket.io into our Nest.js project enables efficient and real-time communication between the server and clients, ensuring instant updates and interactions, particularly essential for features like live drone tracking and monitoring
+In summary, integrating Socket.io into our Nest.js project enables efficient and real-time communication between the server and clients, ensuring instant updates and interactions, which is essential for features like live drone tracking and monitoring.
 
 ## Pitch Deck
 
