@@ -7,7 +7,7 @@ This NestJS application provides a backend service for managing drone historical
 
 ### HTTP Endpoint (`/remoteIdentifier`)
 
-- This endpoint is used to insert drone remote data into a PostgreSQL database. It accepts JSON payloads representing drone data and is primarily designed for storing historical drone information.
+- This endpoint is used to insert drone remote data into a PostgreSQL/composeDB database. It accepts JSON payloads representing drone data and is primarily designed for storing historical drone information.
 -  Remote_ID Data Structure:
 -  [remote_ID.json](https://github.com/SkyTradeLinks/SkyRadar-server-v2/files/15483650/remote_ID.json)
 
