@@ -1,7 +1,5 @@
 # Drone Radar Server
 
-[remote_ID_data_structure.txt](https://github.com/SkyTradeLinks/SkyRadar-server-v2/files/15483113/remote_ID_data_structure.txt)
-
 ## Overview
 deployed url: https://devradar.sky.trade/
 
@@ -16,6 +14,8 @@ This NestJS application provides a backend service for managing drone historical
   -query-params(lon1, lat1, lon2, lat2)
   
   - This enpoint is used to fetch available drones in a land area.
+  - Remote_ID Data Structure:
+  - [remote_ID_data_structure.txt](https://github.com/SkyTradeLinks/SkyRadar-server-v2/files/15483113/remote_ID_data_structure.txt)
   - Postman Api specification:
   - [Sky-Radar-Server.postman_collection.json](https://github.com/SkyTradeLinks/SkyRadar-server-v2/files/15483569/Sky-Radar-Server.postman_collection.json)
 
