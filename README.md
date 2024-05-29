@@ -11,11 +11,11 @@ This NestJS application provides a backend service for managing drone historical
   this model is then deployed on a ceramic server running on AWS. This makes it easy for the signals to be readily available for use.
   During a request, A graphQL query is sent directly to the ceramic server and since the model is indexed, this makes the response time more faster than regular REST API.
 
-  API Response includes but not limited to:
-  A, Specific macAddress that signifies each drone.
-  b, The current location the drones.
-  c, The timestamp when the signal was created.
-  d, The timestamp of when a drone was last seen at a particular land area.
+API Response includes but not limited to:
+-, Specific macAddress that signifies each drone.
+-, The current location the drones.
+-, The timestamp when the signal was created.
+-, The timestamp of when a drone was last seen at a particular land area.
 
 ### HTTP Endpoint (`/remoteIdentifier`)
 
