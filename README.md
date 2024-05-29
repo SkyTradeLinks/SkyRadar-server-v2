@@ -4,7 +4,7 @@
 deployed url: https://devradar.sky.trade/
 
 This NestJS application provides a backend service for managing drone historical data through HTTP and WebSocket interfaces. It consists and built together with:
-- Ceramic/ComposeDB: A decentralized database network that ensures data transparency, security and availability.
+- Ceramic/ComposeDB: A decentralized database network that plays an important role in our application's data management. By leveraging this technology, we ensure that our drone historical data is stored in a secure, transparent, and highly available manner. ComposeDB's decentralized architecture allows for real-time data synchronization and validation, making it an ideal solution for our use case. With Ceramic/ComposeDB, we can confidently store and manage large amounts of data while maintaining the highest levels of data integrity and security.
 
 ### HTTP Endpoint (`/remoteIdentifier`)
 
