@@ -1,15 +1,27 @@
+# SkyRadar App
+The SkyRadar app collects RemoteID data from nearby drones using BRID. The data collected by the app is sent to our server where its is aggregated and analysed. An explainer video is added below
+
+<div>
+    <a href="https://www.loom.com/share/1132ef4f66114cc3ab1666e7c43fa374">
+      <p>SkyRadar Demo Video</p>
+    </a>
+    <a href="https://www.loom.com/share/1132ef4f66114cc3ab1666e7c43fa374">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/1132ef4f66114cc3ab1666e7c43fa374-with-play.gif">
+    </a>
+  </div>
+
 # Drone Radar Server
 
 ## Overview
 deployed url: https://devradar.sky.trade/
 
-This NestJS application provides a backend service for managing drone historical data through HTTP and WebSocket interfaces. It consists and built together with:
+The Drone Radar server collects, stores and aggregates data from the SkyRadar app. It is a NestJS application that provides a backend service for managing drone historical data through HTTP and WebSocket interfaces. It consists and built together with:
 - Ceramic/ComposeDB: A decentralized database network that plays an important role in our application's data management. By leveraging this technology, we ensure that our drone historical data is stored in a secure, transparent, and highly available manner. ComposeDB's decentralized architecture allows for real-time data synchronization and validation, making it an ideal solution for our use case. With Ceramic/ComposeDB, we can confidently store and manage large amounts of data while maintaining the highest levels of data integrity and security.
 
 - How we use it:
-  A  GraphQL model is designed with the data structure of the drone signals that is sent to a ceramic node, this data is then indexed for easy access and also for proper filtering.
-  this model is then deployed on a ceramic server running on AWS. This makes it easy for the signals to be readily available for use.
-  During a request, A graphQL query is sent directly to the ceramic server and since the model is indexed, this makes the response time more faster than regular REST API.
+  A  GraphQL model is designed with the data structure of the drone signals that is sent to a Ceramic node, this data is then indexed for easy access and also for proper filtering.
+  This model is deployed on a Ceramic server running on AWS. This makes it easy for the signals to be readily available for use.
+  During a request, A GraphQL query is sent directly to the Ceramic server and since the model is indexed, this makes the response time more faster than regular REST API.
 - API Response includes but not limited to:
 1, Specific macAddress that signifies each drone.
 2, The current location the drones.
