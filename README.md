@@ -10,7 +10,9 @@ The SkyRadar app collects RemoteID data from nearby drones using BRID. The data 
     </a>
   </div>
 
-- Link to App APK: [SkyTrade Drones Radar](https://github.com/SkyTradeLinks/main-site/pull/1/files)
+
+
+
 
 # SkyTrade Drones Real-Time API
 
