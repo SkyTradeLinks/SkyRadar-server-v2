@@ -1,12 +1,25 @@
 # Drone Radar Server
 
 ## Overview
+deployed url: https://devradar.sky.trade/
 
 This NestJS application provides a backend service for managing drone historical data through HTTP and WebSocket interfaces. It consists of:
 
 ### HTTP Endpoint (`/remoteIdentifier`)
 
-- This endpoint is used to insert drone remote data into a PostgreSQL database. It accepts JSON payloads representing drone data and is primarily designed for storing historical drone information.
+- This endpoint is used to insert drone remote data into a PostgreSQL/composeDB database. It accepts JSON payloads representing drone data and is primarily designed for storing historical drone information.
+-  Remote_ID Data Structure:
+-  [remote_ID.json](https://github.com/SkyTradeLinks/SkyRadar-server-v2/files/15483650/remote_ID.json)
+
+
+
+
+### HTTP Endpoint(`/get-ceramic-drone-data`)
+  -query-params(lon1, lat1, lon2, lat2)
+  
+  - This enpoint is used to fetch available drones in a land area.
+  - Postman Api specification:
+  - [Sky-Radar-Server.postman_collection.json](https://github.com/SkyTradeLinks/SkyRadar-server-v2/files/15483569/Sky-Radar-Server.postman_collection.json)
 
 ### WebSocket Endpoint (`/droneIdSocket`)
 
@@ -37,6 +50,7 @@ In summary, integrating Socket.io into our Nest.js project enables efficient and
 
 - [Jonathan Dockrell](https://www.linkedin.com/in/jonathandockrell/)
 - [Marcin Zduniak](https://www.linkedin.com/in/marcinzduniak/)
+- [chuka udemezue](http://linkedin.com/in/chukky2486/)
 - [Sayantan Modal](https://www.linkedin.com/in/sayantan-mondal-1693101b4/)
 - [Yusuff Jamal](https://www.linkedin.com/in/jamal-yusuff-1a4aa1212/)
 - [Glwadys Fayolle](https://www.linkedin.com/in/glwadysfayolle/)
@@ -45,4 +59,4 @@ In summary, integrating Socket.io into our Nest.js project enables efficient and
 
 ## Pitch Deck
 
-Check out our [Pitch Deck](https://docs.google.com/presentation/d/1QKGFC1rzmfq2gfGGCehoOTlCrLVp9rz_IftHjV2kc-Y/edit) for detailed information about our project and goals.
+Check out our [Pitch Deck](https://docs.google.com/presentation/d/1VTnetTIVSRTUtu8aEBAMtddwFpQXzJn_vT37olPoEg0/edit) for detailed information about our project and goals.
