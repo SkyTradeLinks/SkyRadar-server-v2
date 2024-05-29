@@ -1,5 +1,7 @@
 # SkyTrade Drones Radar
-The SkyRadar app collects RemoteID data from nearby drones using BRID. The data collected by the app is sent to our server where its is aggregated and analysed. An explainer video is added below
+deployed url: https://drive.google.com/file/d/1TgJI5ASaW2Kcxr3QfJ99pQ3E0QymQFbo/view?usp=sharing
+
+The SkyRadar app collects RemoteID data from nearby drones using BRID. The data collected by the app is sent to our server where it is aggregated and analysed. SkyRadar utilizes Google Maps and Google Places for mapping and place predictions implementation respectively. An explainer video of how our app works is added below
 
 <div>
     <a href="https://www.loom.com/share/1132ef4f66114cc3ab1666e7c43fa374">
@@ -9,9 +11,6 @@ The SkyRadar app collects RemoteID data from nearby drones using BRID. The data 
       <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/1132ef4f66114cc3ab1666e7c43fa374-with-play.gif">
     </a>
   </div>
-
-
-
 
 
 # SkyTrade Drones Real-Time API
