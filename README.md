@@ -1,6 +1,7 @@
 [remote_ID_data_structure.txt](https://github.com/SkyTradeLinks/SkyRadar-server-v2/files/15483113/remote_ID_data_structure.txt)# Drone Radar Server
 
 ## Overview
+deployed url: https://devradar.sky.trade/
 
 This NestJS application provides a backend service for managing drone historical data through HTTP and WebSocket interfaces. It consists of:
 
