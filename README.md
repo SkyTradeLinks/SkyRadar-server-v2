@@ -59,4 +59,4 @@ In summary, integrating Socket.io into our Nest.js project enables efficient and
 
 ## Pitch Deck
 
-Check out our [Pitch Deck]([https://docs.google.com/presentation/d/1VTnetTIVSRTUtu8aEBAMtddwFpQXzJn_vT37olPoEg0/edit) for detailed information about our project and goals.
+Check out our [Pitch Deck](https://docs.google.com/presentation/d/1QKGFC1rzmfq2gfGGCehoOTlCrLVp9rz_IftHjV2kc-Y/edit) for detailed information about our project and goals.
