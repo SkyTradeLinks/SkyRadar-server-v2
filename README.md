@@ -1,4 +1,4 @@
-# SkyRadar App
+# SkyTrade Drones Radar
 The SkyRadar app collects RemoteID data from nearby drones using BRID. The data collected by the app is sent to our server where its is aggregated and analysed. An explainer video is added below
 
 <div>
@@ -10,16 +10,18 @@ The SkyRadar app collects RemoteID data from nearby drones using BRID. The data 
     </a>
   </div>
 
-# Drone Radar Server
+- Link to App APK: [SkyTrade Drones Radar](https://github.com/SkyTradeLinks/main-site/pull/1/files)
+
+# SkyTrade Drones Real-Time API
 
 ## Overview
 deployed url: https://devradar.sky.trade/
 
-The Drone Radar server collects, stores and aggregates data from the SkyRadar app. It is a NestJS application that provides a backend service for managing drone historical data through HTTP and WebSocket interfaces. It consists and built together with:
+The API collects, stores and aggregates data from the SkyTrade Drones Radar app. It is a NestJS application that provides a backend service for managing drone historical data through HTTP and WebSocket interfaces. It consists and built together with:
 - Ceramic/ComposeDB: A decentralized database network that plays an important role in our application's data management. By leveraging this technology, we ensure that our drone historical data is stored in a secure, transparent, and highly available manner. ComposeDB's decentralized architecture allows for real-time data synchronization and validation, making it an ideal solution for our use case. With Ceramic/ComposeDB, we can confidently store and manage large amounts of data while maintaining the highest levels of data integrity and security.
 
 - How we use it:
-  A  GraphQL model is designed with the data structure of the drone signals that is sent to a Ceramic node, this data is then indexed for easy access and also for proper filtering.
+  A  GraphQL model is designed with the data structure of the drone signals that is sent to a Ceramic node, this data is indexed for easy access and also for proper filtering.
   This model is deployed on a Ceramic server running on AWS. This makes it easy for the signals to be readily available for use.
   During a request, A GraphQL query is sent directly to the Ceramic server and since the model is indexed, this makes the response time more faster than regular REST API.
 - API Response includes but not limited to:
@@ -58,6 +60,7 @@ The Drone Radar server collects, stores and aggregates data from the SkyRadar ap
 - [Next.js](https://nextjs.org/)
 - [Node.js](https://nodejs.org/)
 - [Express.js](https://expressjs.com/)
+- [Ceramic/ComposeDB](https://developers.ceramic.network/)
 - [cors](https://github.com/expressjs/cors)
 - [socket.io](https://socket.io/)
 
@@ -67,18 +70,6 @@ The Drone Radar server collects, stores and aggregates data from the SkyRadar ap
 By leveraging Socket.io, we can enhance user experience by enabling features such as live updates on drone locations and flight paths. This integration allows us to implement dynamic, real-time tracking of drones using our radar app. Users can view drone movements instantly on the map, powered by Mapbox. Socket.io ensures that clients receive immediate updates on drone positions, altitude, speed, and direction, providing accurate and timely information to enhance monitoring capabilities.
 
 In summary, integrating Socket.io into our Nest.js project enables efficient and real-time communication between the server and clients, ensuring instant updates and interactions, particularly essential for features like live drone tracking and monitoring
-
-
-## Acknowledgments
-
-- [Jonathan Dockrell](https://www.linkedin.com/in/jonathandockrell/)
-- [Marcin Zduniak](https://www.linkedin.com/in/marcinzduniak/)
-- [chuka udemezue](http://linkedin.com/in/chukky2486/)
-- [Sayantan Modal](https://www.linkedin.com/in/sayantan-mondal-1693101b4/)
-- [Yusuff Jamal](https://www.linkedin.com/in/jamal-yusuff-1a4aa1212/)
-- [Glwadys Fayolle](https://www.linkedin.com/in/glwadysfayolle/)
-- [Emnet Yohannes](https://www.linkedin.com/in/emnet-yohannes-4132bb1a1/)
-- [Chinka Uchenna](https://www.linkedin.com/in/chinka-uchenna-loveday-955a1084)
 
 ## Pitch Deck
 
