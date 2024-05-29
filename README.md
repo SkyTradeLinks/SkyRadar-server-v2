@@ -7,7 +7,7 @@ This NestJS application provides a backend service for managing drone historical
 - Ceramic/ComposeDB: A decentralized database network that plays an important role in our application's data management. By leveraging this technology, we ensure that our drone historical data is stored in a secure, transparent, and highly available manner. ComposeDB's decentralized architecture allows for real-time data synchronization and validation, making it an ideal solution for our use case. With Ceramic/ComposeDB, we can confidently store and manage large amounts of data while maintaining the highest levels of data integrity and security.
 
 - How we use it:
-  A  GraphQL model is specifically designed with the data structure of the drone signals that is sent to a ceramic node, this data is then indexed for easy access and also for proper filtering.
+  A  GraphQL model is designed with the data structure of the drone signals that is sent to a ceramic node, this data is then indexed for easy access and also for proper filtering.
   this model is then deployed on a ceramic server running on AWS. This makes it easy for the signals to be readily available for use.
   During a request, A graphQL query is sent directly to the ceramic server and since the model is indexed, this makes the response time more faster than regular REST API.
 - API Response includes but not limited to:
