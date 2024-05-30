@@ -18,6 +18,10 @@ export class AuthSignatureMiddleware implements NestMiddleware {
   async use(req: Request, res: Response, next: NextFunction): Promise<any> {
     const { sign, sign_issue_at, sign_nonce, sign_address } = req.headers;
 
+    console.log({ sign, sign_issue_at, sign_nonce, sign_address });
+
+    console.log({ headers: req.headers });
+
     const issuedAtDate = new Date(sign_issue_at as unknown as string);
     const currentDate = new Date();
     const diffInMinutes =
@@ -54,6 +58,7 @@ export class AuthSignatureMiddleware implements NestMiddleware {
       const messagePayload = message.payload;
 
       const resp = await message.verify(messagePayload, signature);
+      console.log({ resp });
 
       if (resp.success) {
         next();

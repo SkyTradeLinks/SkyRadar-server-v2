@@ -14,9 +14,11 @@ import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
 import { RemoteIdentifierDto } from '../../dtos/remoteIdentifier.dto';
 import { BackendInterceptor } from 'src/common/interceptors/backend.interceptor';
 import { ComposeDbClientService } from 'src/compose-db_client/compose-db_client.service';
+import { AuthSignatureMiddleware } from 'src/middleware/authSignature.middleware';
 
 @Controller('remoteIdentifier')
 @ApiTags('remoteIdentifier')
+@UseInterceptors(AuthSignatureMiddleware)
 @UseInterceptors(BackendInterceptor)
 export class RemoteIdentifierController {
   constructor(
@@ -31,6 +33,13 @@ export class RemoteIdentifierController {
     return this.remoteIdentifierService.createRemoteIdentifierService(
       remotedata,
     );
+  }
+
+  @Get('/test')
+  @ApiOperation({ summary: 'Test request' })
+  async testRequest() {
+    console.log('success');
+    return { success: true };
   }
 
   @Get('/get-ceramic-drone-data')
