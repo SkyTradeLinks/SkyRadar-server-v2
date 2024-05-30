@@ -43,7 +43,7 @@ export class AuthSignatureMiddleware implements NestInterceptor {
     const network = this.configService.get<string>('WEB3_NETWORK');
 
     console.log({
-      header,
+      header: { t: 'sip99' },
       payload: {
         domain,
         address: sign_address,
@@ -54,7 +54,7 @@ export class AuthSignatureMiddleware implements NestInterceptor {
         nonce: sign_nonce,
         issuedAt: sign_issue_at,
       },
-      network,
+      network: 'solana',
     });
 
     const message = new SIWWeb3({
