@@ -8,6 +8,7 @@ import {
   UsePipes,
   ValidationPipe,
   ParseIntPipe,
+  Req,
 } from '@nestjs/common';
 import { RemoteIdentifierService } from '../../services/remoteIdentifier/remoteIdentifier.service';
 import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
@@ -37,8 +38,8 @@ export class RemoteIdentifierController {
 
   @Get('/test')
   @ApiOperation({ summary: 'Test request' })
-  async testRequest() {
-    console.log('success');
+  async testRequest(@Req() req: any) {
+    console.log('success', req);
     return { success: true };
   }
 
