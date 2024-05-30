@@ -20,6 +20,10 @@ export class AuthSignatureMiddleware implements NestInterceptor {
     const req = context.switchToHttp().getRequest();
     const { sign, sign_issue_at, sign_nonce, sign_address } = req.headers;
 
+    console.log({ sign, sign_issue_at, sign_nonce, sign_address });
+
+    console.log({ header: req.headers });
+
     const issuedAtDate = new Date(sign_issue_at);
     const currentDate = new Date();
     const diffInMinutes =
@@ -62,6 +66,7 @@ export class AuthSignatureMiddleware implements NestInterceptor {
     const messagePayload = message.payload;
 
     const res = await message.verify(messagePayload, signature);
+    console.log({ res });
 
     if (res.success) {
       return next.handle();
