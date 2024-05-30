@@ -42,6 +42,21 @@ export class AuthSignatureMiddleware implements NestInterceptor {
     const uri = this.configService.get<string>('FRONTEND_URI');
     const network = this.configService.get<string>('WEB3_NETWORK');
 
+    console.log({
+      header,
+      payload: {
+        domain,
+        address: sign_address,
+        statement: 'Sign in to SkyTrade app.', // todo: set the same message on the frontend in configs
+        uri,
+        version: '1',
+        chainId: 1,
+        nonce: sign_nonce,
+        issuedAt: sign_issue_at,
+      },
+      network,
+    });
+
     const message = new SIWWeb3({
       header,
       payload: {
