@@ -19,7 +19,7 @@ import { AuthSignatureMiddleware } from 'src/middleware/authSignature.middleware
 @Controller('remoteIdentifier')
 @ApiTags('remoteIdentifier')
 @UseInterceptors(AuthSignatureMiddleware)
-@UseInterceptors(BackendInterceptor)
+// @UseInterceptors(BackendInterceptor)
 export class RemoteIdentifierController {
   constructor(
     private readonly remoteIdentifierService: RemoteIdentifierService,
