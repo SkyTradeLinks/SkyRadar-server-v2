@@ -11,7 +11,7 @@ export class AirRightsService {
       url: 'https://api.parcllabs.com/v1/price_feed/5373892/price_feed',
       headers: {
         accept: 'application/json',
-        Authorization: 'tJzuDnnstOg2xhHfU0U04jDL-fdSOAkZbQ0q1TvwqJk',
+        Authorization: process.env.PARCL_API_KEY,
       },
     };
 
@@ -25,7 +25,7 @@ export class AirRightsService {
       url: `https://api.parcllabs.com/v1/search/markets?query=${city}`,
       headers: {
         accept: 'application/json',
-        Authorization: 'tJzuDnnstOg2xhHfU0U04jDL-fdSOAkZbQ0q1TvwqJk',
+        Authorization: process.env.PARCL_API_KEY,
       },
     };
 
@@ -50,7 +50,7 @@ export class AirRightsService {
       url: `https://api.parcllabs.com/v1/search/markets?geoid=${geoid}`,
       headers: {
         accept: 'application/json',
-        Authorization: 'tJzuDnnstOg2xhHfU0U04jDL-fdSOAkZbQ0q1TvwqJk',
+        Authorization: process.env.PARCL_API_KEY,
       },
     };
 
@@ -80,7 +80,7 @@ export class AirRightsService {
         url: `https://api.parcllabs.com/v1/price_feed/${parcelId}/price_feed?limit=5`,
         headers: {
           accept: 'application/json',
-          Authorization: '9mq18ybwLpa1ZV_F1flMrUC85S-IKjqqEFkoRhbUpDA',
+          Authorization: process.env.PARCL_API_KEY,
         },
       };
       const res = await axios.request(options);
@@ -90,6 +90,7 @@ export class AirRightsService {
       const firstPriceFeed = pricePerSquareFoot[0].price_feed;
       const fifteenPercent = firstPriceFeed * 0.15;
       const today = new Date().toISOString().split('T')[0];
+      // return parseFloat(fifteenPercent.toFixed(4));
 
       return { date: today, price: parseFloat(fifteenPercent.toFixed(4)) };
     }
