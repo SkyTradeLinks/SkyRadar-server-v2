@@ -58,7 +58,8 @@ export class AuthSignatureMiddleware implements NestInterceptor {
     });
 
     const message = new SIWWeb3({
-      header,
+      // signature: sign,
+      header: { t: 'sip99' },
       payload: {
         domain,
         address: sign_address,
@@ -69,7 +70,7 @@ export class AuthSignatureMiddleware implements NestInterceptor {
         nonce: sign_nonce,
         issuedAt: sign_issue_at,
       },
-      network,
+      network: 'solana',
     });
 
     console.log({ message });
