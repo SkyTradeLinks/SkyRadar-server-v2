@@ -2,19 +2,73 @@ enum Status {
   AIRBORNE
   STATIONARY
 }
+input RemoteDataInput {
+  macAddress: String!
+  lastSeen: String!
+  firstSeen: String!
+  transportType: String!
+  status: Status!
+  created: DateTime!
+  longitude: Float!
+  latitude: Float!
+  operatorId: OperatorIdInput!
+  identification1: Identification1Input!
+  identification2: Identification2Input!
+}
+
+input OperatorIdInput {
+  operatorId: [Int!]!
+}
+
+input Identification1Input {
+  uasId: [Int!]!
+  idType: String!
+  uaType: String!
+}
+
+input Identification2Input {
+  uasId: [Int!]!
+  idType: String!
+  uaType: String!
+}
 type RemoteData
   @createModel(accountRelation: LIST, description: "A simple Drone signals")
   @createIndex(fields: [{ path: "status" }])
   @createIndex(fields: [{ path: "longitude" }])
   @createIndex(fields: [{ path: "latitude" }])
   @createIndex(fields: [{ path: "firstSeen" }])
-  @createIndex(fields: [{ path: "lastSeen" }]) {
+  @createIndex(fields: [{ path: "lastSeen" }])
+  @createIndex(fields: [{ path: "operatorId" }])
+  @createIndex(fields: [{ path: "identification1" }])
+  @createIndex(fields: [{ path: "identification2" }]) {
   macAddress: String! @string(minLength: 1, maxLength: 100)
   lastSeen: String! @string(minLength: 1, maxLength: 100)
   firstSeen: String! @string(minLength: 1, maxLength: 100)
   transportType: String! @string(minLength: 1, maxLength: 100)
+  operatorId: OperatorId! @relationDocument(property: "macAddress")
+  identification1: Identification1! @relationDocument(property: "macAddress")
+  identification2: Identification2! @relationDocument(property: "macAddress")
   longitude: Float!
   latitude: Float!
   status: Status!
   created: DateTime!
+}
+
+type OperatorId
+  @createModel(accountRelation: LIST, description: "A drone operatorID") {
+  operatorId: [Int]! @list(maxLength: 30)
+}
+
+type Identification1
+  @createModel(accountRelation: LIST, description: "Drone identification1") {
+  uasId: [Int]! @list(maxLength: 30)
+  idType: String! @string(minLength: 1, maxLength: 100)
+  uaType: String! @string(minLength: 1, maxLength: 100)
+}
+
+type Identification2
+  @createModel(accountRelation: LIST, description: "Drone identification2") {
+  uasId: [Int]! @list(maxLength: 30)
+  idType: String! @string(minLength: 1, maxLength: 100)
+  uaType: String! @string(minLength: 1, maxLength: 100)
 }
