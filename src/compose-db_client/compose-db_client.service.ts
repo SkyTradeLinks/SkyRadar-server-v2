@@ -8,6 +8,7 @@ export class ComposeDbClientService {
   async createRemoteData(remoteData) {
     const now = new Date();
     const compose = await new Ceramic().composeDB();
+    console.log(`"${remoteData.operatorId.operatorId}"`);
 
     if (process.env.IS_CERAMIC_ACTIVE) {
       try {
@@ -19,19 +20,10 @@ export class ComposeDbClientService {
               lastSeen: "${remoteData.connection.lastSeen}",
               firstSeen: "${remoteData.connection.firstSeen}",
               transportType: "${remoteData.connection.transportType}",
-              operatorId: {
-                operatorId: "${remoteData.operatorId}"
-              },
-              identification1: {
-                uasId: "${remoteData.identification1.uasId}",
-                idType: "${remoteData.identification1.idType}",
-                uaType: "${remoteData.identification1.uaType}"
-              },
-              identification2: {
-                uasId: "${remoteData.identification2.uasId}",
-                idType: "${remoteData.identification2.idType}",
-                uaType: "${remoteData.identification2.uaType}"
-              },
+              operatorId: "${remoteData.operatorId.operatorId}",
+              uasId: "${remoteData.identification1.uasId}",
+              idType: "${remoteData.identification1.idType}",
+              uaType: "${remoteData.identification1.uaType}"
               status: ${remoteData.location.status},
               created: "${now.toISOString()}"
               longitude: ${remoteData.location.longitude}
@@ -43,19 +35,10 @@ export class ComposeDbClientService {
               lastSeen
               firstSeen
               transportType
-              operatorId {
-                operatorId
-              }
-              identification1 {
+              operatorId 
                 uasId
                 idType
-                uaType
-              }
-              identification2 {
-                uasId
-                idType
-                uaType
-              }
+                uaType 
               status
               created
               longitude
